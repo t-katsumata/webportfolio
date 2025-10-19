@@ -1,0 +1,310 @@
+{
+  "basicSkill": {
+    "title": "必須スキル（コアとなる技術力）",
+    "content": [
+      {
+        "language": {
+          "title": "言語",
+          "content": [
+            {
+              "id": 1,
+              "name": "HTML",
+              "level": 5,
+              "detail": "構造定義、セマンティックマークアップ、アクセシビリティ対応",
+              "iconUrl": "/images/skills/html-5.svg"
+            },
+            {
+              "id": 2,
+              "name": "CSS",
+              "level": 5,
+              "detail": "CSS設計（BEM/FLOCSS）、レスポンシブデザイン、アニメーション、SCSS",
+              "iconUrl": "/images/skills/css-3.svg"
+            },
+            {
+              "id": 3,
+              "name": "JavaScript",
+              "level": 3,
+              "detail": "ES6+、DOM操作、非同期処理、モジュール化",
+              "iconUrl": "/images/skills/javascript.svg"
+            },
+            {
+              "id": 4,
+              "name": "TypeScript",
+              "level": 2,
+              "detail": "型定義、インターフェース設計、ジェネリクス",
+              "iconUrl": "/images/skills/typescript.svg"
+            },
+            {
+              "id": 5,
+              "name": "Python",
+              "level": 1,
+              "detail": "オンライン学習サイトで基本構文を勉強。API連携で天気予報のテータ取得",
+              "iconUrl": "/images/skills/python.svg"
+            }
+          ]
+        },
+        "framework": {
+          "title": "フレームワーク／ライブラリ",
+          "content": [
+            {
+              "id": 1,
+              "name": "React",
+              "level": 2,
+              "detail": "フックの活用、状態管理、コンポーネント設計",
+              "iconUrl": "/images/skills/react.svg"
+            },
+            {
+              "id": 2,
+              "name": "Next.js",
+              "level": 2,
+              "detail": "SSR・SSG・ルーティング・最適化、MicroCMSとの連携",
+              "iconUrl": "/images/skills/nextjs.svg"
+            },
+            {
+              "id": 3,
+              "name": "Vue.js",
+              "level": 2,
+              "detail": "リアクティブなデータバインディング、コンポーネント設計、Composition API",
+              "iconUrl": "/images/skills/vue.svg"
+            },
+            {
+              "id": 4,
+              "name": "Nuxt.js",
+              "level": 2,
+              "detail": "SSR・SSG・ルーティング",
+              "iconUrl": "/images/skills/nuxt.svg"
+            },
+            {
+              "id": 5,
+              "name": "Tailwind CSS",
+              "level": 2,
+              "detail": "グリッドシステム、ユーティリティクラス、フォーム・モーダル、Vue連携",
+              "iconUrl": "/images/skills/tailwind-css.svg"
+            },
+            {
+              "id": 6,
+              "name": "jQuery",
+              "level": 5,
+              "detail": "DOM操作、Ajax、主にレガシー案件対応",
+              "iconUrl": "/images/skills/jquery.svg"
+            }
+          ]
+        },
+        "development": {
+          "title": "開発環境",
+          "content": [
+            {
+              "id": 1,
+              "name": "Visual Studio Code",
+              "level": 5,
+              "detail": "基本操作、カスタマイズ、拡張機能の導入、GitHub連携",
+              "iconUrl": "/images/skills/visual-studio-code.svg"
+            },
+            {
+              "id": 2,
+              "name": "Sublime Text 3",
+              "level": 5,
+              "detail": "基本操作、カスタマイズ、プラグインの導入",
+              "iconUrl": "/images/skills/sublimetext.svg"
+            },
+            {
+              "id": 3,
+              "name": "Adobe Dreamweaver",
+              "level": 3,
+              "detail": "基本操作、カスタマイズ、FTP接続",
+              "iconUrl": "/images/skills/adobe-dreamweaver.svg"
+            }
+          ]
+        },
+        "version": {
+          "title": "バージョン管理",
+          "content": [
+            {
+              "id": 1,
+              "name": "Git, GitHub",
+              "level": 4,
+              "detail": "Git基本操作（クローン, pull, push, マージ）、SourceTree連携",
+              "iconUrl": "/images/skills/git.svg"
+            },
+            {
+              "id": 2,
+              "name": "Subversion",
+              "level": 3,
+              "detail": "バージョン登録・更新・取り消し",
+              "iconUrl": "/images/skills/subversion.svg"
+            }
+          ]
+        },
+        "other": {
+          "title": "その他",
+          "content": [
+            {
+              "id": 1,
+              "name": "MySQL",
+              "level": 3,
+              "detail": "基本的なCRUD操作、テーブル設計",
+              "iconUrl": "/images/skills/mysql.svg"
+            },
+            {
+              "id": 2,
+              "name": "FTPクライアント",
+              "level": 5,
+              "detail": "FFFTP、WinSCP、FileZilla。ベーシック認証対応",
+              "iconUrl": "/images/skills/filezilla.svg"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "subSkill": {
+    "title": "補助スキル（案件や役割によって活きる技術）",
+    "content": [
+      {
+        "id": 1,
+        "name": "WordPress",
+        "type": "オープンソースCMS",
+        "level": 5,
+        "detail": "テーマ開発、カスタム投稿設計、固定ページや記事の作成・編集、phpの基本構文",
+        "iconUrl": "/images/skills/wordpress.svg"
+      },
+      {
+        "id": 2,
+        "name": "MicroCMS",
+        "type": "国内ヘッドレスCMS",
+        "level": 2,
+        "detail": "API設定、記事の作成・編集、Next.js・Vite連携",
+        "iconUrl": "/images/skills/microCMS.svg"
+      },
+      {
+        "id": 3,
+        "name": "SITE PUBLIS, SiteMiraiz",
+        "type": "国内有料CMS",
+        "level": 3,
+        "detail": "基本操作、投稿フィールド設計、記事の作成・編集",
+        "iconUrl": "/images/skills/domesticPaidCMS.png"
+      },
+      {
+        "id": 4,
+        "name": "Gulp + EJS, Vite",
+        "type": "ビルド／タスクランナー",
+        "level": 4,
+        "detail": "テンプレート・コンポーネント作成、CSS/JavaScript圧縮",
+        "iconUrl": "/images/skills/gulp.svg"
+      },
+      {
+        "id": 5,
+        "name": "Prettier, ESLint",
+        "type": "品質管理",
+        "level": 5,
+        "detail": "構文エラー修正",
+        "iconUrl": "/images/skills/prettier.svg"
+      },
+      {
+        "id": 6,
+        "name": "XAMPP, phpMyAdmin",
+        "type": "サーバー／環境構築",
+        "level": 3,
+        "detail": "WordPress連携",
+        "iconUrl": "/images/skills/xampp.svg"
+      },
+      {
+        "id": 7,
+        "name": "Google Analytics 4",
+        "type": "分析／マーケティング連携",
+        "level": 2,
+        "detail": "アカウント、プロパティ、イベント、データストリーム、カスタムレポート",
+        "iconUrl": "/images/skills/google-analytics.svg"
+      },
+      {
+        "id": 8,
+        "name": "Excel VBA",
+        "type": "言語拡張",
+        "level": 3,
+        "detail": "業務自動化、データ処理（.txtファイル→Excelへデータ取り込み）",
+        "iconUrl": "/images/skills/excelVBA.svg"
+      },
+      {
+        "id": 9,
+        "name": "ドメイン管理",
+        "type": "ドメイン",
+        "level": 3,
+        "detail": "新規ドメイン取得、ドメインの更新",
+        "iconUrl": "/images/skills/domain.png"
+      },
+      {
+        "id": 10,
+        "name": "Eclipse",
+        "type": "IDE",
+        "level": 2,
+        "detail": "仮想ショッピングサイト構築で使用経験あり",
+        "iconUrl": "/images/skills/eclipse.svg"
+      }
+    ]
+  },
+  "tool": {
+    "title": "業務効率化ツール（チーム連携・運用を支える）",
+    "content": [
+      {
+        "id": 1,
+        "name": "Teams, Slack, Zoom",
+        "type": "コミュニケーションツール",
+        "detail": "メッセージのやり取り、Web会議",
+        "iconUrl": "/images/skills/microsoft-teams.svg"
+      },
+      {
+        "id": 2,
+        "name": "Backlog",
+        "type": "プロジェクト管理",
+        "detail": "新規プロジェクト作成、メッセージのやり取り、Git連携",
+        "iconUrl": "/images/skills/Backlog.png"
+      },
+      {
+        "id": 3,
+        "name": "Microsoft Office",
+        "type": "ドキュメント／資料作成",
+        "detail": "各種資料・ドキュメント作成、Excel、Word、PowerPoint、ExcelVBA",
+        "iconUrl": "/images/skills/office.svg"
+      },
+      {
+        "id": 4,
+        "name": "Figma, Adobe XD",
+        "type": "デザイン連携",
+        "detail": "基本操作、各パーツを素材化",
+        "iconUrl": "/images/skills/figma.svg"
+      },
+      {
+        "id": 5,
+        "name": "Adobe Photoshop, Adobe illustrator",
+        "type": "デザイン編集",
+        "detail": "基本操作、画像の修正、スライスして各パーツを素材化",
+        "iconUrl": "/images/skills/adobe-photoshop.svg"
+      }
+    ]
+  },
+  "qualification": {
+    "title": "主な資格取得",
+    "content": [
+      {
+        "id": 1,
+        "name": "文部科学省後援　色彩検定　3級",
+        "date": "平成27年7月"
+      },
+      {
+        "id": 2,
+        "name": "Webクリエイター能力認定試験　HTML5　エキスパート",
+        "date": "平成27年9月"
+      },
+      {
+        "id": 3,
+        "name": "WACA上級ウェブ解析士",
+        "date": "平成27年9月"
+      },
+      {
+        "id": 4,
+        "name": "ビジネス著作権検定　上級",
+        "date": "平成28年3月"
+      }
+    ]
+  }
+}
