@@ -30,6 +30,20 @@ body {
   --default-font-family: var(--font-default);
 }
 
+@layer components {
+  .slide-fadeUp-enter-active {
+    transition: all 0.8s ease;
+  }
+  .slide-fadeUp-enter-from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  .slide-fadeUp-enter-to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* TOPローディング */
 .fade-enter-active,
 .fade-leave-active {
@@ -38,6 +52,57 @@ body {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* TOP-ScrollLine */
+.scrollLine-text {
+  display: block;
+  font-size: 14px;
+  text-align: center;
+}
+.scrollLine-border {
+  display: block;
+  position: relative;
+  top: 10px;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-default);
+    animation: scrollbar 2.0s ease-in-out infinite;
+    margin: auto;
+  }
+}
+@media (width < 768px) {
+  .scrollLine-text {
+    color: #fff;
+    filter: drop-shadow(0 0 3px rgb(0 0 0 / 0.8));
+  }
+  .scrollLine-border {
+    &::before {
+      background: #fff;
+    }
+  }
+}
+@keyframes scrollbar {
+  0% {
+    height: 0;
+    top: 0;
+  }
+  30% {
+    height: 100%;
+  }
+  100% {
+    top: 100%;
+  }
 }
 
 /* Skills - スキル一覧 */
@@ -203,7 +268,7 @@ body {
   .timeline-item {
     flex-direction: row;
     flex: 0 0 auto;
-    padding: 1em 0;
+    padding: 1em 1em 1em 0;
     &::before {
       top: 0;
       left: 8em;

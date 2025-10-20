@@ -87,8 +87,8 @@ export interface Work {
   summary: string;
   basicSkill: string[];
 }
-export interface WorkListResponse {
-  contents: Work[];
+export interface WorkListResponse<T> {
+  contents: T[];
   totalCount: number;
   offset: number;
   limit: number;
