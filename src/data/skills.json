@@ -178,10 +178,10 @@
       },
       {
         "id": 3,
-        "name": "SITE PUBLIS, SiteMiraiz",
+        "name": "国産CMS",
         "type": "国内有料CMS",
         "level": 3,
-        "detail": "基本操作、投稿フィールド設計、記事の作成・編集",
+        "detail": "SITE PUBLIS、SiteMiraiz、基本操作、投稿フィールド設計、記事の作成・編集",
         "iconUrl": "/images/skills/domesticPaidCMS.png"
       },
       {

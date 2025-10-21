@@ -55,3 +55,19 @@ export const getPickupWorks = async (limit = 100): Promise<MicroCMSListResponse<
     return undefined;
   }
 };
+
+export const getWorksBySlug = async (slug: string): Promise<MicroCMSListResponse<Work> | undefined> => {
+  try {
+    const data = await client.getList<Work>({
+      endpoint: "works",
+      queries: {
+        filters: `slug[equals]${slug}`
+      },
+    });
+    return data;
+  } catch(err) {
+    console.log("~~ getWorksBySlug ~~");
+    console.log(err);
+    return undefined;
+  }
+}

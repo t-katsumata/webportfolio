@@ -81,11 +81,16 @@ export interface Thumbnail {
 export interface Work {
   id: string;
   slug: string;
-  pickup: boolean;
   title: string;
   thumbnail: Thumbnail;
   summary: string;
   basicSkill: string[];
+  subSkill: string[];
+  tools: string[];
+  period: string;
+  devScale: string;
+  position: string;
+  detail: string;
 }
 export interface WorkListResponse<T> {
   contents: T[];
