@@ -186,22 +186,30 @@
       },
       {
         "id": 4,
-        "name": "Gulp + EJS, Vite",
+        "name": "Vite",
+        "type": "ビルド／タスクランナー",
+        "level": 2,
+        "detail": "コンポーネント作成",
+        "iconUrl": "/images/skills/vitejs.svg"
+      },
+      {
+        "id": 5,
+        "name": "Gulp",
         "type": "ビルド／タスクランナー",
         "level": 4,
         "detail": "テンプレート・コンポーネント作成、CSS/JavaScript圧縮",
         "iconUrl": "/images/skills/gulp.svg"
       },
       {
-        "id": 5,
-        "name": "Prettier, ESLint",
+        "id": 6,
+        "name": "ESLint, Prettier",
         "type": "品質管理",
         "level": 5,
         "detail": "構文エラー修正",
         "iconUrl": "/images/skills/prettier.svg"
       },
       {
-        "id": 6,
+        "id": 7,
         "name": "XAMPP, phpMyAdmin",
         "type": "サーバー／環境構築",
         "level": 3,
@@ -209,7 +217,7 @@
         "iconUrl": "/images/skills/xampp.svg"
       },
       {
-        "id": 7,
+        "id": 8,
         "name": "Google Analytics 4",
         "type": "分析／マーケティング連携",
         "level": 2,
@@ -217,7 +225,7 @@
         "iconUrl": "/images/skills/google-analytics.svg"
       },
       {
-        "id": 8,
+        "id": 9,
         "name": "Excel VBA",
         "type": "言語拡張",
         "level": 3,
@@ -225,7 +233,7 @@
         "iconUrl": "/images/skills/excelVBA.svg"
       },
       {
-        "id": 9,
+        "id": 10,
         "name": "ドメイン管理",
         "type": "ドメイン",
         "level": 3,
@@ -233,7 +241,7 @@
         "iconUrl": "/images/skills/domain.png"
       },
       {
-        "id": 10,
+        "id": 11,
         "name": "Eclipse",
         "type": "IDE",
         "level": 2,
@@ -247,7 +255,7 @@
     "content": [
       {
         "id": 1,
-        "name": "Teams, Slack, Zoom",
+        "name": "Slack, Teams, Zoom",
         "type": "コミュニケーションツール",
         "detail": "メッセージのやり取り、Web会議",
         "iconUrl": "/images/skills/microsoft-teams.svg"
@@ -268,17 +276,31 @@
       },
       {
         "id": 4,
-        "name": "Figma, Adobe XD",
+        "name": "Figma",
         "type": "デザイン連携",
         "detail": "基本操作、各パーツを素材化",
         "iconUrl": "/images/skills/figma.svg"
       },
       {
         "id": 5,
-        "name": "Adobe Photoshop, Adobe illustrator",
+        "name": "Adobe XD",
+        "type": "デザイン連携",
+        "detail": "基本操作、各パーツを素材化",
+        "iconUrl": "/images/skills/adobe-xd.svg"
+      },
+      {
+        "id": 6,
+        "name": "Adobe Photoshop",
         "type": "デザイン編集",
         "detail": "基本操作、画像の修正、スライスして各パーツを素材化",
         "iconUrl": "/images/skills/adobe-photoshop.svg"
+      },
+      {
+        "id": 7,
+        "name": "Adobe illustrator",
+        "type": "デザイン編集",
+        "detail": "基本操作、スライスして各パーツを素材化",
+        "iconUrl": "/images/skills/adobe-illustrator.svg"
       }
     ]
   },

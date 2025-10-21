@@ -141,7 +141,7 @@ onMounted(async (): Promise<void> => {
         </table>
       </div>
       <figure class="w-full md:w-2/5">
-        <img class="w-full aspect-[4/3] object-cover" :src="`${articles[0]?.thumbnail.url}`" width="4" height="3" alt="" />
+        <img class="w-full aspect-[4/3] object-cover" :src="`${articles[0]?.thumbnail.url}?w=712&h=534`" width="712" height="534" alt="" loading="eager" />
       </figure>
     </CommonSection>
 
@@ -151,7 +151,7 @@ onMounted(async (): Promise<void> => {
           <dt>開発・運営担当期間</dt>
           <dd>{{ articles[0]?.period }}</dd>
         </div>
-        <div class="grid grid-cols-[23.5%_1fr] md:grid-cols-[200px_1fr] items-center gap-5 py-4 border-b border-b-main">
+        <div v-if="articles[0]?.devScale" class="grid grid-cols-[23.5%_1fr] md:grid-cols-[200px_1fr] items-center gap-5 py-4 border-b border-b-main">
           <dt>開発規模</dt>
           <dd>{{ articles[0]?.devScale }}</dd>
         </div>
