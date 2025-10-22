@@ -1,0 +1,415 @@
+/* 各要素のフェードイン */
+.fadeTarget {
+  &.fadeUp,
+  &.fadeLeft,
+  &.fadeRight {
+    opacity: 0;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+  }
+  &.fadeUp {
+    transform: translateY(30px);
+    &.isActive {
+      animation-name: fadeUp;
+    }
+  }
+  &.fadeLeft {
+    transform: translateX(-30px);
+    &.isActive {
+      animation-name: fadeLeft;
+    }
+  }
+  &.fadeRight {
+    transform: translateX(30px);
+    &.isActive {
+      animation-name: fadeRight;
+    }
+  }
+}
+@media (width < 768px) {
+  .fadeTarget {
+    &.fadeLeft {
+      transform: translateY(30px);
+      &.isActive {
+        animation-name: sp-fadeLeft;
+      }
+    }
+    &.fadeRight {
+      transform: translateY(30px);
+      &.isActive {
+        animation-name: sp-fadeRight;
+      }
+    }
+  }
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes sp-fadeLeft {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes sp-fadeRight {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TOPローディング */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.8s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* TOP-ScrollLine */
+.scrollLine-text {
+  display: block;
+  font-size: 14px;
+  text-align: center;
+}
+.scrollLine-border {
+  display: block;
+  position: relative;
+  top: 10px;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-default);
+    animation: scrollbar 2.0s ease-in-out infinite;
+    margin: auto;
+  }
+}
+@media (width < 768px) {
+  .scrollLine-text {
+    color: #fff;
+    filter: drop-shadow(0 0 3px rgb(0 0 0 / 0.8));
+  }
+  .scrollLine-border {
+    &::before {
+      background: #fff;
+    }
+  }
+}
+@keyframes scrollbar {
+  0% {
+    height: 0;
+    top: 0;
+  }
+  30% {
+    height: 100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+/* Skills - スキル一覧 */
+.skill-icon {
+  width: auto;
+  height: 56px;
+  margin-inline: auto;
+}
+.skill-bar {
+  width: 100%;
+  height: 24px;
+  font-size: 13px;
+  margin-top: 12px;
+  padding-left: 4px;
+  border: solid 1px var(--color-default);
+  position: relative;
+  overflow: hidden;
+  color: white;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-main), var(--color-accent));
+    width: 0;
+  }
+  span {
+    display: block;
+    position: relative;
+    z-index: 10;
+    line-height: 21px;
+  }
+}
+.skillTarget.isActive {
+  .skill-bar::before {
+    animation: skillBar 1.2s ease 0.5s forwards;
+  }
+  .skill-icon {
+    animation: skillIcon 0.7s ease forwards;
+  }
+}
+
+.level-1::before { --target-width: 20%; }
+.level-2::before { --target-width: 40%; }
+.level-3::before { --target-width: 60%; }
+.level-4::before { --target-width: 80%; }
+.level-5::before { --target-width: 100%; }
+
+@keyframes skillBar {
+  to { width: var(--target-width); }
+}
+
+@keyframes skillIcon {
+  to { transform: rotateY(360deg); }
+}
+
+/* About - 略歴 */
+.timeline {
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /* scroll-snap-type: x proximity; */
+  margin: 40px auto 0;
+  perspective: 1000px;
+}
+.timeline-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* scroll-snap-align: center; */
+  flex: 0 0 75%;
+  &::before {
+    content: "";
+    top: 3.5em;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    background-color: var(--color-main);
+  }
+}
+.timeline-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 20px;
+  font-weight: bold;
+  width: 60%;
+  height: 2em;
+  border-radius: 6px;
+  background-color: var(--color-accent);
+  color: #fff;
+  text-align: center;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0.6;
+  transform: scale(0.8);
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0.5em;
+    height: 0.5em;
+    background-color: var(--color-accent);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(50%) rotate(45deg);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    bottom: -1.5em;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .timeline-item.active & {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 3em 0 2em;
+  width: 100%;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0.6;
+  transform: scale(0.8);
+  .timeline-item.active & {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.timeline-title {
+  font-weight: bold;
+}
+.timeline-text {
+  margin-top: 4px;
+}
+@media (width > 512px) {
+  .timeline {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    /* scroll-snap-type: y mandatory; */
+    height: 500px;
+  }
+  .timeline-wrapper {
+    flex-direction: column;
+    padding: 48px 0;
+  }
+  .timeline-item {
+    flex-direction: row;
+    flex: 0 0 auto;
+    padding: 1em 1em 1em 0;
+    &::before {
+      top: 0;
+      left: 8em;
+      width: 4px;
+      height: 100%;
+    }
+  }
+  .timeline-date {
+    width: 5em;
+    &::before {
+      top: 50%;
+      bottom: auto;
+      left: auto;
+      right: 0;
+      transform: translateX(50%) translateY(-50%) rotate(45deg);
+    }
+    &::after {
+      top: 50%;
+      bottom: auto;
+      left: 6em;
+      transform: translateY(-50%);
+    }
+  }
+  .timeline-content {
+    margin: 0 0 0 4em;
+    width: calc(100% - 10em);
+  }
+  .timeline-image {
+    flex-shrink: 0;
+  }
+}
+@media (width > 896px) {
+  .timeline {
+    height: 400px;
+  }
+  .timeline-content {
+    flex-direction: row;
+  }
+}
+
+/* Works - 成果物ギャラリー */
+.worksPagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.worksPagination-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: color 0.3s;
+}
+.worksPagination-item__next {
+  text-align: right;
+}
+.worksPagination-item__prev::before,
+.worksPagination-item__next::after {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border: solid 1px var(--color-default);
+  border-radius: 50%;
+  transition: color 0.3s, background 0.3s, border-color 0.3s;
+}
+.worksPagination-item__prev::before {
+  content: '←';
+}
+.worksPagination-item__next::after {
+  content: '→';
+}
+.worksPagination-body {
+  max-width: 280px;
+}
+.worksPagination-title {
+  display: block;
+  font-weight: bold;
+}
+.worksPagination-text {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1.6;
+}
+@media (hover:hover) {
+  .worksPagination-item:hover {
+    color: var(--color-sub);
+  }
+  .worksPagination-item__prev:hover::before,
+  .worksPagination-item__next:hover::after {
+    background: var(--color-sub);
+    color: #fff;
+    border-color: var(--color-sub);
+  }
+}
+@media (width < 768px) {
+  .worksPagination {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .worksPagination-item__prev {
+    margin-right: auto;
+  }
+  .worksPagination-item__next {
+    margin-left: auto;
+  }
+  .worksPagination-body {
+    max-width: none;
+  }
+  .worksPagination-item__prev::before,
+  .worksPagination-item__next::after {
+    flex-shrink: 0;
+  }
+}

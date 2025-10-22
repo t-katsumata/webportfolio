@@ -21,13 +21,13 @@ const isLoadedMap = ref<Record<string, boolean>>({});
         <h3 class="order-2 font-medium mt-3">{{ article.title }}</h3>
         <div v-show="!isLoadedMap[article.id]" class="bg-gray-300 animate-pulse w-[336px] h-[252px] rounded-md absolute z-10"></div>
         <figure class="order-1 relative">
-          <img class="w-full aspect-[4/3] object-cover" :src="`${article.thumbnail.url}?w=710&h=532`" :width="336" :height="252" alt="" loading="eager" @load="isLoadedMap[article.id] = true" />
+          <img class="w-full aspect-[4/3] object-cover" :src="`${article.thumbnail.url}`" :width="336" :height="252" alt="" loading="eager" @load="isLoadedMap[article.id] = true" />
         </figure>
         <p class="mt-0.5 order-3 text-[13px]/[1.6] text-gray-500">{{ article.basicSkill.join(",").replace(/,/g, ", ") }}</p>
       </RouterLink>
     </article>
   </div>
-  <div v-else class="mt-10">
+  <div v-else class="mt-10 fadeTarget fadeUp">
     <p>データがありません。</p>
   </div>
 </template>

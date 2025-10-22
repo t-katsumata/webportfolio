@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import CommonSection from '../components/CommonSection.vue';
 import PageFadeUp from '../components/pageFadeUp.vue';
 import H1Heading from '../ui/H1-heading.vue';
-import { computed, onMounted, ref } from 'vue';
-import { getWorksBySlug } from '../api/articles';
+import { computed, onMounted, ref, watch } from 'vue';
+import { getAdjacentWorks, getWorksBySlug } from '../api/articles';
 import type { Work, SkillData } from '../types';
 import skillJson from "../data/skills.json";
 import DOMPurify from 'dompurify';
@@ -12,6 +12,8 @@ import DOMPurify from 'dompurify';
 const route = useRoute();
 const articles = ref<Work[]>([]);
 const skillData = ref<SkillData>(skillJson);
+const prevWork = ref<Work | null>(null);
+const nextWork = ref<Work | null>(null);
 
 function getMatchedIcons(names: string[], source: { name: string, iconUrl: string }[]): { name: string; iconUrl: string }[] {
   return names.flatMap((name) => 
@@ -38,15 +40,30 @@ const sanitizedDetail = computed(() => {
   return articles.value[0]?.detail ? DOMPurify.sanitize(articles.value[0].detail) : '';
 });
 
-onMounted(async (): Promise<void> => {
-  const slugParam = route.params.slug;
-  const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
-  if (!slug) return;
+const fetchWork = async (slug: string) => {
   const data = await getWorksBySlug(slug);
   if (data) {
     articles.value = data.contents;
+
+    const publishedAt = data.contents[0]?.publishedAt;
+    if (publishedAt) {
+      const adjacent = await getAdjacentWorks(publishedAt);
+      prevWork.value = adjacent.prev;
+      nextWork.value = adjacent.next;
+    }
   }
+}
+
+onMounted(async (): Promise<void> => {
+  const slugParam = route.params.slug;
+  const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
+  if (slug) fetchWork(slug);
 });
+
+watch(() => route.params.slug, (newSlug) => {
+  const slug = Array.isArray(newSlug) ? newSlug[0] : newSlug;
+  if (slug) fetchWork(slug);
+})
 </script>
 
 <template>
@@ -141,7 +158,7 @@ onMounted(async (): Promise<void> => {
         </table>
       </div>
       <figure class="w-full md:w-2/5">
-        <img class="w-full aspect-[4/3] object-cover" :src="`${articles[0]?.thumbnail.url}?w=712&h=534`" width="712" height="534" alt="" loading="eager" />
+        <img class="w-full aspect-[4/3] object-cover" :src="`${articles[0]?.thumbnail.url}`" width="712" height="534" alt="" loading="eager" />
       </figure>
     </CommonSection>
 
@@ -166,6 +183,24 @@ onMounted(async (): Promise<void> => {
           </dd>
         </div>
       </dl>
+    </CommonSection>
+
+    <CommonSection>
+      <div class="worksPagination">
+        <RouterLink v-if="prevWork" :to="`/works/${prevWork.slug}`" class="worksPagination-item worksPagination-item__prev">
+          <div class="worksPagination-body">
+            <span class="worksPagination-title">Prev</span>
+            <span class="worksPagination-text">{{ prevWork.title }}</span>
+          </div>
+        </RouterLink>
+        <div></div>
+        <RouterLink v-if="nextWork" :to="`/works/${nextWork.slug}`" class="worksPagination-item worksPagination-item__next">
+          <div class="worksPagination-body">
+            <span class="worksPagination-title">Next</span>
+            <span class="worksPagination-text">{{ nextWork.title }}</span>
+          </div>
+        </RouterLink>
+      </div>
     </CommonSection>
   </PageFadeUp>
 </template>

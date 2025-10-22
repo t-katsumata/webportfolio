@@ -7,7 +7,7 @@ import Loading from "../components/Loading.vue";
 import CommonSection from "../components/CommonSection.vue";
 import Skills from "../components/Skills.vue";
 import PickupWorks from "../components/Works/PickupWorks.vue";
-import { onMounted, ref } from "vue";
+import { nextTick, onMounted, ref, watch } from "vue";
 import PageFadeUp from "../components/pageFadeUp.vue";
 import ScrollLine from "../ui/scrollLine.vue";
 
@@ -31,6 +31,32 @@ onMounted(() => {
     showContent.value = true;
   }
 });
+
+watch(showContent, async (newVal) => {
+  if (newVal) {
+    await nextTick();
+
+    const targetElements = document.querySelectorAll<HTMLElement>(".fadeTarget");
+    console.log(targetElements.length)
+
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[], obs: IntersectionObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add("isActive");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: "0px 0px -20% 0px",
+      }
+    );
+
+    targetElements.forEach((target) => observer.observe(target));
+  }
+});
 </script>
 
 <template>
@@ -49,16 +75,16 @@ onMounted(() => {
       </div>
 
       <CommonSection>
-        <h2 class="text-3xl/[1.4] font-medium text-accent">ユーザにやさしく<br />　エンジニアにもやさしく</h2>
+        <h2 class="fadeTarget fadeUp text-3xl/[1.4] font-medium text-accent">ユーザにやさしく<br />　エンジニアにもやさしく</h2>
         <div class="flex flex-col-reverse md:flex-row md:gap-14 gap-6 max-md:items-center mt-8">
-          <div>
+          <div class="fadeTarget fadeLeft">
             <p>
               私はフロントエンドエンジニアとして、常に「人に寄り添うものづくり」を心がけています。サイトを訪れた誰もが迷わず目的の情報にたどり着けるよう、アクセシビリティを意識した設計を大切にしています。同時に、クライアントの想いやメッセージがきちんと伝わるよう、UIやアニメーションを通じて温度感のある表現を追求しています。単なる機能ではなく「気持ちが届く体験」を届けたいと考えています。
             </p>
             <p class="mt-4">そして、共に開発する仲間にとっても扱いやすいコードを書くことを信条としています。シンプルで堅牢な設計を心がけ、誰が見ても理解しやすく、安心して手を加えられるコードを残すことで、チーム全体が気持ちよく前に進める環境をつくります。</p>
             <p class="mt-4">「ユーザにやさしく、エンジニアにもやさしく」──その両方を大切にする姿勢が、私のエンジニアとしての原点です。<br />これからも、人に寄り添う開発を続けていきたいです。</p>
           </div>
-          <figure class="shrink-0 mt-14">
+          <figure class="fadeTarget fadeRight shrink-0 max-md:mt-14">
             <img src="../assets/images/index-hero.png" width="256" height="256" alt="" />
           </figure>
         </div>
@@ -67,14 +93,14 @@ onMounted(() => {
       <CommonSection>
         <H2Heading title="About" subtitle="自己紹介" />
         <section class="flex flex-col-reverse md:flex-row-reverse gap-16 items-center mt-10">
-          <div>
+          <div class="fadeTarget fadeRight">
             <h3 class="text-3xl font-semibold"><span class="block text-[0.5em]">TOORU KATSUMATA</span>勝又　亨</h3>
             <p class="mt-10">
               静岡県生まれのフロントエンドエンジニア。専門学校ではCやC++といったプログラミング言語を学び、新卒から約8年間、光送受信機や自動車メーターなどのソフトウェア・ハードウェアのデバッグ業務に従事。学生時代から趣味として取り組んでいたWeb開発を仕事にしたいと考え、2017年にWeb制作会社へ転職。サイト更新業務からキャリアをスタートし、サイトリニューアルにおけるフルコーディング、食品関連サイトの運営・保守、WordPressや国産CMSを用いたサイト構築など、幅広い業務を経験してきました。
             </p>
             <ButtonDefault url="/about" text="More Profile" class="mt-12" />
           </div>
-          <figure class="shrink-0">
+          <figure class="fadeTarget fadeLeft shrink-0">
             <img src="../assets/images/index-about.jpg" width="300" height="420" alt="プロフィール写真" loading="lazy" />
           </figure>
         </section>
@@ -89,20 +115,22 @@ onMounted(() => {
             :tool="false"
             :qualification="false"
           />
-          <ButtonDefault url="/skills" text="More Skills" class="mt-12" />
+          <ButtonDefault url="/skills" text="More Skills" class="fadeTarget fadeUp mt-12" />
         </div>
       </CommonSection>
 
       <CommonSection class="@container">
         <H2Heading title="Works" subtitle="成果物ギャラリー" />
-        <PickupWorks />
-        <ButtonDefault url="/works" text="View All Works" class="mt-12" />
+        <div class="fadeTarget fadeUp">
+          <PickupWorks />
+          <ButtonDefault url="/works" text="View All Works" class="fadeTarget fadeUp mt-12" />
+        </div>
       </CommonSection>
 
       <CommonSection>
         <H2Heading id="contact" title="Contact" subtitle="お問い合わせ" />
-        <p class="mt-10">お気軽にお問い合わせください。</p>
-        <ul class="mt-8">
+        <p class="mt-10 fadeTarget fadeUp">お気軽にお問い合わせください。</p>
+        <ul class="mt-8 fadeTarget fadeUp">
           <li class="text-[20px]">
             <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/mail.svg)] before:bg-cover before:inline-block before:w-[42px] before:h-10" href="mailto:katsumata.tooru.ks@gmail.com">katsumata.tooru.ks@gmail.com</a></li>
           <li class="text-[20px] mt-6">

@@ -13,7 +13,7 @@ const props = defineProps({
 const skillData = ref<SkillData>(skillJson);
 
 onMounted(() => {
-  const targetElements = document.querySelectorAll<HTMLElement>(".target");
+  const targetElements = document.querySelectorAll<HTMLElement>(".skillTarget");
 
   const observer = new IntersectionObserver(
     (entries: IntersectionObserverEntry[], obs: IntersectionObserver) => {
@@ -36,11 +36,11 @@ onMounted(() => {
 <template>
   <!-- 必須スキル -->
   <section v-if="props.basicSkill">
-    <h2 class="text-accent font-medium text-[20px] pl-3 border-l-4 border-accent">{{ skillData.basicSkill.title }}</h2>
+    <h2 class="fadeTarget fadeUp text-accent font-medium text-[20px] pl-3 border-l-4 border-accent" v-intersect>{{ skillData.basicSkill.title }}</h2>
     <section v-for="(category, key) in skillData.basicSkill.content[0]" class="mt-6" :key="key">
-      <h3 class="text-accent font-medium before:content-['◎'] text-[18px] before:mr-1">{{ category.title }}</h3>
-      <ul class="grid grid-cols-[repeat(auto-fill,200px)] items-start gap-5 mt-3">
-        <li v-for="item in category.content" class="grid grid-rows-subgrid row-span-4 border border-gray-400 shadow-[0_0_5px_rgb(128_128_128_/_0.5)] rounded-xl gap-0 target" :key="item.id">
+      <h3 class="fadeTarget fadeUp text-accent font-medium before:content-['◎'] text-[18px] before:mr-1" v-intersect>{{ category.title }}</h3>
+      <ul class="fadeTarget fadeUp grid grid-cols-[repeat(auto-fill,200px)] items-start gap-5 mt-3" v-intersect>
+        <li v-for="item in category.content" class="grid grid-rows-subgrid row-span-4 border border-gray-400 shadow-[0_0_5px_rgb(128_128_128_/_0.5)] rounded-xl gap-0 skillTarget" :key="item.id">
           <figure class="place-content-center p-3 border-b border-b-gray-400">
             <img class="skill-icon" :src="item.iconUrl" width="56" height="56" alt="" />
           </figure>
@@ -58,10 +58,10 @@ onMounted(() => {
 
   <!-- 補助スキル -->
   <section v-if="props.subSkill" class="mt-16">
-    <h2 class="text-accent font-medium text-[20px] pl-3 border-l-4 border-accent">{{ skillData.subSkill.title }}</h2>
+    <h2 class="fadeTarget fadeUp text-accent font-medium text-[20px] pl-3 border-l-4 border-accent" v-intersect>{{ skillData.subSkill.title }}</h2>
     <section class="mt-6">
-      <ul class="grid grid-cols-[repeat(auto-fill,200px)] items-start gap-5 mt-3">
-        <li v-for="item in skillData.subSkill.content" class="grid grid-rows-subgrid row-span-4 border border-gray-400 shadow-[0_0_5px_rgb(128_128_128_/_0.5)] rounded-xl gap-0 target" :key="item.id">
+      <ul class="fadeTarget fadeUp grid grid-cols-[repeat(auto-fill,200px)] items-start gap-5 mt-3" v-intersect>
+        <li v-for="item in skillData.subSkill.content" class="grid grid-rows-subgrid row-span-4 border border-gray-400 shadow-[0_0_5px_rgb(128_128_128_/_0.5)] rounded-xl gap-0 skillTarget" :key="item.id">
           <figure class="place-content-center p-3 border-b border-b-gray-400">
             <img class="skill-icon" :src="item.iconUrl" width="56" height="56" alt="" />
           </figure>
@@ -81,10 +81,10 @@ onMounted(() => {
 
   <!-- ツール -->
   <section v-if="props.tool" class="mt-16">
-    <h2 class="text-accent font-medium text-[20px] pl-3 border-l-4 border-accent">{{ skillData.tool.title }}</h2>
+    <h2 class="fadeTarget fadeUp text-accent font-medium text-[20px] pl-3 border-l-4 border-accent" v-intersect>{{ skillData.tool.title }}</h2>
     <section class="mt-6">
-      <ul class="grid grid-cols-[repeat(auto-fill,200px)] items-start gap-5 mt-3">
-        <li v-for="item in skillData.tool.content" class="grid grid-rows-subgrid row-span-4 border border-gray-400 shadow-[0_0_5px_rgb(128_128_128_/_0.5)] rounded-xl gap-0 target" :key="item.id">
+      <ul class="fadeTarget fadeUp grid grid-cols-[repeat(auto-fill,200px)] items-start gap-5 mt-3" v-intersect>
+        <li v-for="item in skillData.tool.content" class="grid grid-rows-subgrid row-span-4 border border-gray-400 shadow-[0_0_5px_rgb(128_128_128_/_0.5)] rounded-xl gap-0 skillTarget" :key="item.id">
           <figure class="place-content-center p-3 border-b border-b-gray-400">
             <img class="skill-icon" :src="item.iconUrl" width="56" height="56" alt="" />
           </figure>
@@ -101,9 +101,9 @@ onMounted(() => {
 
   <!-- 資格 -->
   <section v-if="props.qualification" class="mt-16">
-    <h2 class="text-accent font-medium text-[20px] pl-3 border-l-4 border-accent">{{ skillData.qualification.title }}</h2>
+    <h2 class="fadeTarget fadeUp text-accent font-medium text-[20px] pl-3 border-l-4 border-accent" v-intersect>{{ skillData.qualification.title }}</h2>
     <section class="mt-6">
-      <ul class="list-disc ml-[1em]">
+      <ul class="fadeTarget fadeUp list-disc ml-[1em]" v-intersect>
         <li v-for="q in skillData.qualification.content" class="not-first-of-type:mt-1">{{ q.name }}（{{ q.date }}）</li>
       </ul>
     </section>
