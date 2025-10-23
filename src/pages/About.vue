@@ -67,10 +67,10 @@ onMounted(async () => {
     <H1Heading title="About" subtitle="自己紹介" />
     <div class="@container px-[2.667%] md:px-6 mt-20">
       <div class="flex @4xl:flex-row flex-col items-center @4xl:gap-[5.8%] gap-9">
-        <figure class="shrink-0">
+        <figure class="shrink-0 fadeTarget fadeLeft" v-intersect>
           <img class="rounded-[8px]" src="../assets/images/index-about.jpg" width="300" height="420" alt="プロフィール写真" />
         </figure>
-        <dl>
+        <dl class="fadeTarget fadeRight" v-intersect>
           <div class="md:flex px-2 py-4 border-b border-gray-300">
             <dt class="shrink-0 w-28 font-medium">名前</dt>
             <dd class="max-md:mt-2 max-md:ml-[1em]">勝又　亨（カツマタ　トオル）</dd>
@@ -103,7 +103,7 @@ onMounted(async () => {
 
     <CommonSection>
       <H2Heading title="Biography" subtitle="略歴" />
-      <div class="timeline" ref="container">
+      <div class="timeline fadeTarget fadeUp" ref="container" v-intersect>
         <dl class="timeline-wrapper">
           <div class="timeline-item" v-for="(item, index) in biography" :key="index" :class="{ active: activeIndex === index }">
             <dt class="timeline-date">{{ item.year }}</dt>
@@ -123,8 +123,8 @@ onMounted(async () => {
 
     <CommonSection class="@container">
       <H2Heading title="Interest" subtitle="好きなもの" />
-      <p class="mt-10">仕事以外でも新しい発見やインスピレーションを大切にしています。</p>
-      <ul class="grid grid-cols-1 @lg:grid-cols-2 @4xl:grid-cols-3 mt-10 @lg:gap-[3.623%] gap-8">
+      <p class="mt-10 fadeTarget fadeUp" v-intersect>仕事以外でも新しい発見やインスピレーションを大切にしています。</p>
+      <ul class="grid grid-cols-1 @lg:grid-cols-2 @4xl:grid-cols-3 mt-10 @lg:gap-[3.623%] gap-8 fadeTarget fadeUp" v-intersect>
         <li class="grid place-content-start">
           <h3 class="font-medium order-2 mt-2">ウォーキング</h3>
           <figure class="order-1">

@@ -1,5 +1,5 @@
 <template>
-  <div class="font-logo leading-none md:text-accent text-white">
+  <div class="font-logo leading-none md:text-accent text-white @max-md:w-[274px]">
     <div>
       T<span class="relative inline-block w-[0.5em] h-[0.87em] ml-[0.075em] mr-[0.025em]">
         <span class="text-[0.55em] absolute top-0 left-0">O</span>

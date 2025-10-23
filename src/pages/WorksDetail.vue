@@ -8,12 +8,15 @@ import { getAdjacentWorks, getWorksBySlug } from '../api/articles';
 import type { Work, SkillData } from '../types';
 import skillJson from "../data/skills.json";
 import DOMPurify from 'dompurify';
+import { useHead } from '@unhead/vue';
 
 const route = useRoute();
 const articles = ref<Work[]>([]);
 const skillData = ref<SkillData>(skillJson);
 const prevWork = ref<Work | null>(null);
 const nextWork = ref<Work | null>(null);
+const dynamicTitle = ref("Works | TOORU KATSUMATA Web Portfolio");
+const descContent = ref("これまでの業務や趣味で開発したサイトの成果物を掲載しております。")
 
 function getMatchedIcons(names: string[], source: { name: string, iconUrl: string }[]): { name: string; iconUrl: string }[] {
   return names.flatMap((name) => 
@@ -40,10 +43,26 @@ const sanitizedDetail = computed(() => {
   return articles.value[0]?.detail ? DOMPurify.sanitize(articles.value[0].detail) : '';
 });
 
+useHead({
+  title: dynamicTitle,
+  meta: [
+    {
+      name: "description",
+      content: descContent,
+    },
+  ],
+});
+
 const fetchWork = async (slug: string) => {
   const data = await getWorksBySlug(slug);
   if (data) {
     articles.value = data.contents;
+
+    const title = data.contents[0]?.title;
+    if (title) {
+      dynamicTitle.value = `${title} | TOORU KATSUMATA Web Portfolio`;
+      descContent.value = `プロジェクト「${title}」の成果物の詳細を掲載しております。`
+    }
 
     const publishedAt = data.contents[0]?.publishedAt;
     if (publishedAt) {
@@ -52,7 +71,7 @@ const fetchWork = async (slug: string) => {
       nextWork.value = adjacent.next;
     }
   }
-}
+};
 
 onMounted(async (): Promise<void> => {
   const slugParam = route.params.slug;
@@ -63,25 +82,25 @@ onMounted(async (): Promise<void> => {
 watch(() => route.params.slug, (newSlug) => {
   const slug = Array.isArray(newSlug) ? newSlug[0] : newSlug;
   if (slug) fetchWork(slug);
-})
+});
 </script>
 
 <template>
   <PageFadeUp>
     <H1Heading title="Works" subtitle="成果物ギャラリー" />
     <CommonSection class="flex flex-col-reverse items-center md:flex-row-reverse gap-12 md:gap-[4.348%]">
-      <div class="w-full md:w-3/5">
-        <h2 class="font-bold text-[20px]">{{ articles[0]?.title }}</h2>
+      <div class="w-full md:w-3/5 fadeTarget fadeRight" v-intersect>
+        <h2 class="font-bold text-[20px]/[1.6]">{{ articles[0]?.title }}</h2>
         <p class="mt-4">{{ articles[0]?.summary }}</p>
-        <table class="relative border w-full border-main mt-10">
+        <table class="relative border w-full border-main mt-12 md:mt-10">
           <caption class="absolute top-[-16px] left-6 bg-bg px-[1em] font-bold">使用技術</caption>
           <tbody>
-            <tr class="border-b border-gray-400">
+            <tr class="border-b border-gray-300">
               <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">必須スキル</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-4">
                 <div
                   v-for="(icon, index) in matchedBasicSkillIcons"
-                  :key="`basic-${index}`"
+                  :key="`basic-${icon.name}-${index}`"
                   class="flex flex-col items-center max-md:w-[80px]"
                 >
                   <img
@@ -102,12 +121,12 @@ watch(() => route.params.slug, (newSlug) => {
                 </div>
               </td>
             </tr>
-            <tr class="border-b border-gray-400">
+            <tr class="border-b border-gray-300">
               <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">補助スキル</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
                 <div
                   v-for="(icon, index) in matchedSubSkillIcons"
-                  :key="`basic-${index}`"
+                  :key="`basic-${icon.name}-${index}`"
                   class="flex flex-col items-center max-md:w-[80px]"
                 >
                   <img
@@ -133,7 +152,7 @@ watch(() => route.params.slug, (newSlug) => {
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
                 <div
                   v-for="(icon, index) in matchedToolIcons"
-                  :key="`basic-${index}`"
+                  :key="`basic-${icon.name}-${index}`"
                   class="flex flex-col items-center max-md:w-[80px]"
                 >
                   <img
@@ -157,28 +176,28 @@ watch(() => route.params.slug, (newSlug) => {
           </tbody>
         </table>
       </div>
-      <figure class="w-full md:w-2/5">
+      <figure class="w-full md:w-2/5 fadeTarget fadeLeft" v-intersect>
         <img class="w-full aspect-[4/3] object-cover" :src="`${articles[0]?.thumbnail.url}`" width="712" height="534" alt="" loading="eager" />
       </figure>
     </CommonSection>
 
     <CommonSection>
-      <dl class="max-w-4xl mx-auto">
-        <div class="grid grid-cols-[23.5%_1fr] md:grid-cols-[200px_1fr] items-center gap-5 pb-4 border-b border-b-main">
-          <dt>開発・運営担当期間</dt>
-          <dd>{{ articles[0]?.period }}</dd>
+      <dl class="max-w-4xl mx-auto fadeTarget fadeUp" v-intersect>
+        <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pb-4 border-b border-gray-300">
+          <dt class="font-bold">開発・運営担当期間</dt>
+          <dd class="max-md:ml-[1em]">{{ articles[0]?.period }}</dd>
         </div>
-        <div v-if="articles[0]?.devScale" class="grid grid-cols-[23.5%_1fr] md:grid-cols-[200px_1fr] items-center gap-5 py-4 border-b border-b-main">
-          <dt>開発規模</dt>
-          <dd>{{ articles[0]?.devScale }}</dd>
+        <div v-if="articles[0]?.devScale" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-300">
+          <dt class="font-bold">開発規模</dt>
+          <dd class="max-md:ml-[1em]">{{ articles[0]?.devScale }}</dd>
         </div>
-        <div class="grid grid-cols-[23.5%_1fr] md:grid-cols-[200px_1fr] items-center gap-5 py-4 border-b border-b-main">
-          <dt>担当ポジション</dt>
-          <dd>{{ articles[0]?.position }}</dd>
+        <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-300">
+          <dt class="font-bold">担当ポジション</dt>
+          <dd class="max-md:ml-[1em]">{{ articles[0]?.position }}</dd>
         </div>
-        <div class="grid grid-cols-[23.5%_1fr] md:grid-cols-[200px_1fr] items-center gap-5 pt-4">
-          <dt>概要</dt>
-          <dd>
+        <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pt-4">
+          <dt class="font-bold">概要</dt>
+          <dd class="max-md:ml-[1em]">
             <div v-html="sanitizedDetail"></div>
           </dd>
         </div>
@@ -186,7 +205,7 @@ watch(() => route.params.slug, (newSlug) => {
     </CommonSection>
 
     <CommonSection>
-      <div class="worksPagination">
+      <div class="worksPagination fadeTarget fadeUp" v-intersect>
         <RouterLink v-if="prevWork" :to="`/works/${prevWork.slug}`" class="worksPagination-item worksPagination-item__prev">
           <div class="worksPagination-body">
             <span class="worksPagination-title">Prev</span>

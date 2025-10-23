@@ -37,7 +37,6 @@ watch(showContent, async (newVal) => {
     await nextTick();
 
     const targetElements = document.querySelectorAll<HTMLElement>(".fadeTarget");
-    console.log(targetElements.length)
 
     const observer = new IntersectionObserver(
       (entries: IntersectionObserverEntry[], obs: IntersectionObserver) => {
@@ -66,8 +65,8 @@ watch(showContent, async (newVal) => {
 
     <!-- 本文 -->
     <PageFadeUp v-if="showContent">
-      <div class="flex md:gap-[2%] items-center justify-center h-dvh relative md:px-6">
-        <h1 class="md:w-3/6 max-md:w-auto max-md:absolute max-md:inset-auto max-md:drop-shadow-[0_0_3px_rgb(0_0_0_/_0.8)]">
+      <div class="flex md:gap-[2%] items-center justify-center h-dvh relative md:px-6 @container">
+        <h1 class="md:w-3/6 max-md:w-auto max-md:absolute max-md:inset-auto max-md:drop-shadow-[0_0_3px_rgb(0_0_0_/_0.8)] @max-md:px-[6.4%]">
           <Logo class="text-[56px]" />
         </h1>
         <div class="md:w-3/6 w-full h-full bg-[url(../assets/images/index-mainVisual.jpg)] bg-cover bg-no-repeat bg-left"></div>
@@ -75,16 +74,16 @@ watch(showContent, async (newVal) => {
       </div>
 
       <CommonSection>
-        <h2 class="fadeTarget fadeUp text-3xl/[1.4] font-medium text-accent">ユーザにやさしく<br />　エンジニアにもやさしく</h2>
-        <div class="flex flex-col-reverse md:flex-row md:gap-14 gap-6 max-md:items-center mt-8">
+        <h2 class="fadeTarget fadeUp text-[28px] md:text-3xl leading-[1.4] font-medium text-accent">ユーザにやさしく<br />　エンジニアにもやさしく</h2>
+        <div class="flex flex-col-reverse md:flex-row md:gap-14 gap-8 max-md:items-center md:mt-8 mt-10">
           <div class="fadeTarget fadeLeft">
             <p>
               私はフロントエンドエンジニアとして、常に「人に寄り添うものづくり」を心がけています。サイトを訪れた誰もが迷わず目的の情報にたどり着けるよう、アクセシビリティを意識した設計を大切にしています。同時に、クライアントの想いやメッセージがきちんと伝わるよう、UIやアニメーションを通じて温度感のある表現を追求しています。単なる機能ではなく「気持ちが届く体験」を届けたいと考えています。
             </p>
-            <p class="mt-4">そして、共に開発する仲間にとっても扱いやすいコードを書くことを信条としています。シンプルで堅牢な設計を心がけ、誰が見ても理解しやすく、安心して手を加えられるコードを残すことで、チーム全体が気持ちよく前に進める環境をつくります。</p>
-            <p class="mt-4">「ユーザにやさしく、エンジニアにもやさしく」──その両方を大切にする姿勢が、私のエンジニアとしての原点です。<br />これからも、人に寄り添う開発を続けていきたいです。</p>
+            <p class="mt-[1em]">そして、共に開発する仲間にとっても扱いやすいコードを書くことを信条としています。シンプルで堅牢な設計を心がけ、誰が見ても理解しやすく、安心して手を加えられるコードを残すことで、チーム全体が気持ちよく前に進める環境をつくります。</p>
+            <p class="mt-[1em]">「ユーザにやさしく、エンジニアにもやさしく」──その両方を大切にする姿勢が、私のエンジニアとしての原点です。<br />これからも、人に寄り添う開発を続けていきたいです。</p>
           </div>
-          <figure class="fadeTarget fadeRight shrink-0 max-md:mt-14">
+          <figure class="fadeTarget fadeRight shrink-0">
             <img src="../assets/images/index-hero.png" width="256" height="256" alt="" />
           </figure>
         </div>
@@ -121,20 +120,18 @@ watch(showContent, async (newVal) => {
 
       <CommonSection class="@container">
         <H2Heading title="Works" subtitle="成果物ギャラリー" />
-        <div class="fadeTarget fadeUp">
-          <PickupWorks />
-          <ButtonDefault url="/works" text="View All Works" class="fadeTarget fadeUp mt-12" />
-        </div>
+        <PickupWorks />
+        <ButtonDefault url="/works" text="View All Works" class="fadeTarget fadeUp mt-12" />
       </CommonSection>
 
       <CommonSection>
         <H2Heading id="contact" title="Contact" subtitle="お問い合わせ" />
         <p class="mt-10 fadeTarget fadeUp">お気軽にお問い合わせください。</p>
-        <ul class="mt-8 fadeTarget fadeUp">
-          <li class="text-[20px]">
-            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/mail.svg)] before:bg-cover before:inline-block before:w-[42px] before:h-10" href="mailto:katsumata.tooru.ks@gmail.com">katsumata.tooru.ks@gmail.com</a></li>
-          <li class="text-[20px] mt-6">
-            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/github.svg)] before:bg-cover before:inline-block before:w-[42px] before:h-10" href="https://github.com/t-katsumata" target="_blank">https://github.com/t-katsumata</a>
+        <ul class="mt-8 fadeTarget fadeUp md:text-[20px]">
+          <li>
+            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/mail.svg)] before:bg-cover before:inline-block before:w-9 before:h-[34px] md:before:w-[42px] md:before:h-10" href="mailto:katsumata.tooru.ks@gmail.com">katsumata.tooru.ks@gmail.com</a></li>
+          <li class="mt-6">
+            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/github.svg)] before:bg-cover before:inline-block before:w-9 before:h-[34px] md:before:w-[42px] md:before:h-10" href="https://github.com/t-katsumata" target="_blank">https://github.com/t-katsumata</a>
           </li>
         </ul>
       </CommonSection>
