@@ -124,7 +124,7 @@ onMounted(async () => {
     <CommonSection class="@container">
       <H2Heading title="Interest" subtitle="好きなもの" />
       <p class="mt-10 fadeTarget fadeUp" v-intersect>仕事以外でも新しい発見やインスピレーションを大切にしています。</p>
-      <ul class="grid grid-cols-1 @lg:grid-cols-2 @4xl:grid-cols-3 mt-10 @lg:gap-[3.623%] gap-8 fadeTarget fadeUp" v-intersect>
+      <ul class="grid grid-cols-1 @lg:grid-cols-2 @4xl:grid-cols-3 mt-10 @lg:gap-[32px_3.623%] gap-8 fadeTarget fadeUp" v-intersect>
         <li class="grid place-content-start">
           <h3 class="font-medium order-2 mt-2">ウォーキング</h3>
           <figure class="order-1">

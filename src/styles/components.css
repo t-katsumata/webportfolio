@@ -346,6 +346,69 @@
 }
 
 /* Works - 成果物ギャラリー */
+.worksList {
+  .worksList-title,
+  .worksList-skill {
+    transition: color 0.4s;
+  }
+}
+.worksList-image,
+.worksList-image::before,
+.worksList-image::after {
+  transition-timing-function: cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+.worksList-image {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.worksList-image::before,
+.worksList-image::after {
+  display: block;
+  opacity: 0;
+  position: absolute;
+}
+.worksList-image::before {
+  background: rgb(0 0 0 / 0.7);
+  content: "";
+  inset: -3px;
+  z-index: 2;
+  transition-duration: 0.4s;
+}
+.worksList-image::after {
+  color: #fff;
+  content: "View More";
+  font-weight: bold;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px #fff;
+  padding: 0.8em;
+  transition-duration: 0.2s;
+  inset: 0;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  line-height: 1;
+}
+@media (any-hover: hover) {
+  .worksList:hover {
+    .worksList-title,
+    .worksList-skill {
+      color: var(--color-sub);
+    }
+    .worksList-image::after {
+      transition-delay: 0.3s;
+    }
+    .worksList-image::before,
+    .worksList-image::after {
+      opacity: 1;
+      z-index: 3;
+    }
+  }
+}
+
 .worksPagination {
   display: flex;
   justify-content: space-between;

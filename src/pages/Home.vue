@@ -67,7 +67,7 @@ watch(showContent, async (newVal) => {
     <PageFadeUp v-if="showContent">
       <div class="flex md:gap-[2%] items-center justify-center h-dvh relative md:px-6 @container">
         <h1 class="md:w-3/6 max-md:w-auto max-md:absolute max-md:inset-auto max-md:drop-shadow-[0_0_3px_rgb(0_0_0_/_0.8)] @max-md:px-[6.4%]">
-          <Logo class="text-[56px]" />
+          <Logo class="text-[56px] md:text-accent text-white" />
         </h1>
         <div class="md:w-3/6 w-full h-full bg-[url(../assets/images/index-mainVisual.jpg)] bg-cover bg-no-repeat bg-left"></div>
         <ScrollLine class="absolute bottom-2.5 md:left-6 left-[50%] max-md:translate-x-[-50%]" />
@@ -75,7 +75,7 @@ watch(showContent, async (newVal) => {
 
       <CommonSection>
         <h2 class="fadeTarget fadeUp text-[28px] md:text-3xl leading-[1.4] font-medium text-accent">ユーザにやさしく<br />　エンジニアにもやさしく</h2>
-        <div class="flex flex-col-reverse md:flex-row md:gap-14 gap-8 max-md:items-center md:mt-8 mt-10">
+        <div class="flex flex-col-reverse md:flex-row md:gap-14 gap-8 items-center md:mt-8 mt-10">
           <div class="fadeTarget fadeLeft">
             <p>
               私はフロントエンドエンジニアとして、常に「人に寄り添うものづくり」を心がけています。サイトを訪れた誰もが迷わず目的の情報にたどり着けるよう、アクセシビリティを意識した設計を大切にしています。同時に、クライアントの想いやメッセージがきちんと伝わるよう、UIやアニメーションを通じて温度感のある表現を追求しています。単なる機能ではなく「気持ちが届く体験」を届けたいと考えています。

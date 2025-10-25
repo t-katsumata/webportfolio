@@ -74,6 +74,7 @@ const fetchWork = async (slug: string) => {
 };
 
 onMounted(async (): Promise<void> => {
+  console.log(matchedSubSkillIcons)
   const slugParam = route.params.slug;
   const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
   if (slug) fetchWork(slug);
@@ -98,79 +99,90 @@ watch(() => route.params.slug, (newSlug) => {
             <tr class="border-b border-gray-300">
               <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">必須スキル</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-4">
-                <div
-                  v-for="(icon, index) in matchedBasicSkillIcons"
-                  :key="`basic-${icon.name}-${index}`"
-                  class="flex flex-col items-center max-md:w-[80px]"
-                >
-                  <img
-                    v-if="matchedBasicSkillIcons.length !== 0"
-                    :src="icon.iconUrl"
-                    :alt="icon.name"
-                    v-tooltip="{
-                      content: icon.name,
-                      placement: 'top',
-                      theme: 'material',
-                      animation: 'shift-away',
-                      arrow: true
-                    }"
-                    class="min-w-12 max-w-14 h-12"
-                  />
-                  <span v-else>－</span>
-                  <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
-                </div>
+                <template v-if="matchedBasicSkillIcons.length > 0">
+                  <div
+                    v-for="(icon, index) in matchedBasicSkillIcons"
+                    :key="`basic-${icon.name}-${index}`"
+                    class="flex flex-col items-center max-md:w-[80px]"
+                  >
+                    <img
+                      :src="icon.iconUrl"
+                      :alt="icon.name"
+                      v-tooltip="{
+                        content: icon.name,
+                        placement: 'top',
+                        theme: 'material',
+                        animation: 'shift-away',
+                        arrow: true
+                      }"
+                      class="min-w-12 max-w-14 h-12"
+                    />
+                    <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
+                  </div>
+                </template>
+                <template v-else>
+                  <span>－</span>
+                </template>
               </td>
             </tr>
             <tr class="border-b border-gray-300">
               <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">補助スキル</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
-                <div
-                  v-for="(icon, index) in matchedSubSkillIcons"
-                  :key="`basic-${icon.name}-${index}`"
-                  class="flex flex-col items-center max-md:w-[80px]"
-                >
-                  <img
-                    v-if="matchedSubSkillIcons.length !== 0"
-                    :src="icon.iconUrl"
-                    :alt="icon.name"
-                    v-tooltip="{
-                      content: icon.name,
-                      placement: 'top',
-                      theme: 'material',
-                      animation: 'shift-away',
-                      arrow: true
-                    }"
-                    class="min-w-12 max-w-14 h-12"
-                  />
-                  <span v-else>－</span>
-                  <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
-                </div>
+                <template v-if="matchedSubSkillIcons.length > 0">
+                  <div
+                    v-for="(icon, index) in matchedSubSkillIcons"
+                    :key="`basic-${icon.name}-${index}`"
+                    class="flex flex-col items-center max-md:w-[80px]"
+                  >
+                    <img
+                      :src="icon.iconUrl"
+                      :alt="icon.name"
+                      v-tooltip="{
+                        content: icon.name,
+                        placement: 'top',
+                        theme: 'material',
+                        animation: 'shift-away',
+                        arrow: true
+                      }"
+                      class="min-w-12 max-w-14 h-12"
+                    />
+                    <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
+                  </div>
+                </template>
+                <template v-else>
+                  <span>－</span>
+                </template>
               </td>
             </tr>
             <tr>
               <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">業務効率化ツール</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
-                <div
-                  v-for="(icon, index) in matchedToolIcons"
-                  :key="`basic-${icon.name}-${index}`"
-                  class="flex flex-col items-center max-md:w-[80px]"
-                >
-                  <img
-                    v-if="matchedToolIcons.length !== 0"
-                    :src="icon.iconUrl"
-                    :alt="icon.name"
-                    v-tooltip="{
-                      content: icon.name,
-                      placement: 'top',
-                      theme: 'material',
-                      animation: 'shift-away',
-                      arrow: true
-                    }"
-                    class="min-w-12 max-w-14 h-12"
-                  />
-                  <span v-else>－</span>
-                  <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
-                </div>
+                <template v-if="matchedToolIcons.length > 0">
+                  <div
+                    v-for="(icon, index) in matchedToolIcons"
+                    :key="`basic-${icon.name}-${index}`"
+                    class="flex flex-col items-center max-md:w-[80px]"
+                  >
+                    <img
+                      v-if="matchedToolIcons.length !== 0"
+                      :src="icon.iconUrl"
+                      :alt="icon.name"
+                      v-tooltip="{
+                        content: icon.name,
+                        placement: 'top',
+                        theme: 'material',
+                        animation: 'shift-away',
+                        arrow: true
+                      }"
+                      class="min-w-12 max-w-14 h-12"
+                    />
+                    <span v-else>－</span>
+                    <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
+                  </div>
+                </template>
+                <template v-else>
+                  <span>－</span>
+                </template>
               </td>
             </tr>
           </tbody>
