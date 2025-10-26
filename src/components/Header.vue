@@ -1,23 +1,97 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useRouter, type Router } from 'vue-router';
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
+import { useRouter } from 'vue-router';
 
 const isOpen = ref(false);
-const toggleMenu = (): void => {
+const router = useRouter();
+const menuButtonRef = ref<HTMLButtonElement | null>(null);
+const firstMenuItemRef = ref<HTMLAnchorElement | null>(null);
+const menuRef = ref<HTMLElement | null>(null);
+
+const toggleMenu = async (): Promise<void> => {
   isOpen.value = !isOpen.value;
-}
-const closeMenu = (): void => {
-  isOpen.value = false;
+
+  await nextTick();
+
+  if (isOpen.value && firstMenuItemRef.value) {
+    firstMenuItemRef.value.focus();
+  } else if (!isOpen.value && menuButtonRef.value) {
+    menuButtonRef.value.focus();
+  }
 }
 
-const router: Router = useRouter();
+const closeMenu = async (): Promise<void> => {
+  isOpen.value = false;
+  await nextTick();
+  if (menuButtonRef.value) {
+    menuButtonRef.value.focus();
+  }
+}
+
+watch(isOpen, (open) => {
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+const handleKeydown = (e: KeyboardEvent): void => {
+  if (e.key === 'Escape' && isOpen.value) {
+    closeMenu();
+  }
+
+  if (e.key === 'Tab' && isOpen.value && menuRef.value) {
+    const focusable = menuRef.value.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last?.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first?.focus();
+    }
+  }
+}
+
+const handleClickOutside = (e: MouseEvent): void => {
+  const menuEl = menuRef.value;
+  const buttonEl = menuButtonRef.value;
+  if (!menuEl || !isOpen.value) return;
+
+  const target = e.target as HTMLElement;
+  if (!menuEl.contains(target) && !buttonEl?.contains(target)) {
+    closeMenu();
+  }
+}
+
+const handleTransitionEnd = (e: TransitionEvent): void => {
+  if (e.propertyName === 'right') {
+    console.log('Menu transition finished');
+  }
+}
 
 onMounted(() => {
   router.afterEach(() => {
     closeMenu();
   });
+
+  document.addEventListener('click', handleClickOutside);
+  window.addEventListener('keydown', handleKeydown);
+
+  if (menuRef.value) {
+    menuRef.value.addEventListener('transitionend', handleTransitionEnd);
+  }
 });
 
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside);
+  window.removeEventListener('keydown', handleKeydown);
+
+  if (menuRef.value) {
+    menuRef.value.removeEventListener('transitionend', handleTransitionEnd);
+  }
+});
 </script>
 
 <template>
@@ -34,10 +108,11 @@ onMounted(() => {
           </span>
         </RouterLink>
         <button
+          ref="menuButtonRef"
           @click="toggleMenu"
           :aria-expanded="isOpen"
           aria-controls="main-menu"
-          class="max-md:fixed max-md:top-[13px] max-md:right-5 max-md:w-[30px] max-md:cursor-pointer max-md:z-20"
+          class="max-md:fixed max-md:top-[13px] max-md:right-[2.667%] max-md:w-[30px] max-md:cursor-pointer max-md:z-20"
         >
           <span
             class="max-md:block max-md:w-full max-md:bg-accent max-md:my-[5px] transition-[0.4s] max-md:h-[3px]"
@@ -53,15 +128,33 @@ onMounted(() => {
           ></span>
         </button>
         <ul
+          ref="menuRef"
           id="main-menu"
           :aria-hidden="!isOpen"
-          class="flex md:gap-x-6 text-accent max-md:flex-col max-md:absolute max-md:top-[55px] max-md:w-[300px] max-md:bg-bg max-md:text-center max-md:gap-y-6 max-md:p-[24px_24px_40px] transition-all duration-400"
+          class="flex md:gap-x-6 text-accent max-md:flex-col max-md:absolute max-md:top-[55px] max-md:w-[300px] max-md:bg-bg max-md:text-center max-md:gap-y-3 max-md:p-[24px_24px_40px] max-md:shadow-[0_4px_4px_rgb(0_0_0/0.3)] transition-all duration-400"
           :class="isOpen ? 'max-md:right-0' : 'max-md:right-[-100%]'"
         >
-          <li><RouterLink to="/about" @click="closeMenu">About</RouterLink></li>
-          <li><RouterLink to="/skills" @click="closeMenu">Skills</RouterLink></li>
-          <li><RouterLink to="/works" @click="closeMenu">Works</RouterLink></li>
-          <li><RouterLink to="/#contact" @click="closeMenu">Contact</RouterLink></li>
+          <li class="max-md:border-b max-md:border-gray-300 max-md:pb-3">
+            <RouterLink to="/about" custom v-slot="{ navigate, href, isActive }">
+              <a
+                :href="href"
+                @click="navigate; closeMenu()"
+                ref="firstMenuItemRef"
+                :class="{ 'text-accent': isActive }"
+              >
+                About
+              </a>
+            </RouterLink>
+          </li>
+          <li class="max-md:border-b max-md:border-gray-300 max-md:pb-3">
+            <RouterLink to="/skills" @click="closeMenu">Skills</RouterLink>
+          </li>
+          <li class="max-md:border-b max-md:border-gray-300 max-md:pb-3">
+            <RouterLink to="/works" @click="closeMenu">Works</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/#contact" @click="closeMenu">Contact</RouterLink>
+          </li>
         </ul>
       </nav>
     </header>

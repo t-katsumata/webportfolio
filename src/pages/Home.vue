@@ -61,7 +61,7 @@ watch(showContent, async (newVal) => {
 <template>
   <div>
     <!-- ローディング画面 -->
-    <Loading />
+    <Loading aria-busy="true" />
 
     <!-- 本文 -->
     <PageFadeUp v-if="showContent">
@@ -84,7 +84,7 @@ watch(showContent, async (newVal) => {
             <p class="mt-[1em]">「ユーザにやさしく、エンジニアにもやさしく」──その両方を大切にする姿勢が、私のエンジニアとしての原点です。<br />これからも、人に寄り添う開発を続けていきたいです。</p>
           </div>
           <figure class="fadeTarget fadeRight shrink-0">
-            <img src="../assets/images/index-hero.png" width="256" height="256" alt="" />
+            <img src="../assets/images/index-hero.png" width="256" height="256" alt="" role="presentation" />
           </figure>
         </div>
       </CommonSection>
@@ -100,7 +100,7 @@ watch(showContent, async (newVal) => {
             <ButtonDefault url="/about" text="More Profile" class="mt-12" />
           </div>
           <figure class="fadeTarget fadeLeft shrink-0">
-            <img src="../assets/images/index-about.jpg" width="300" height="420" alt="プロフィール写真" loading="lazy" />
+            <img src="../assets/images/index-about.jpg" width="300" height="420" alt="勝又亨のプロフィール写真" loading="lazy" />
           </figure>
         </section>
       </CommonSection>
@@ -129,9 +129,9 @@ watch(showContent, async (newVal) => {
         <p class="mt-10 fadeTarget fadeUp">お気軽にお問い合わせください。</p>
         <ul class="mt-8 fadeTarget fadeUp md:text-[20px]">
           <li>
-            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/mail.svg)] before:bg-cover before:inline-block before:w-9 before:h-[34px] md:before:w-[42px] md:before:h-10" href="mailto:katsumata.tooru.ks@gmail.com">katsumata.tooru.ks@gmail.com</a></li>
+            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/mail.svg)] before:bg-cover before:inline-block before:w-9 before:h-[34px] md:before:w-[42px] md:before:h-10 focus:outline-none focus-visible:right-2" href="mailto:katsumata.tooru.ks@gmail.com">katsumata.tooru.ks@gmail.com</a></li>
           <li class="mt-6">
-            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/github.svg)] before:bg-cover before:inline-block before:w-9 before:h-[34px] md:before:w-[42px] md:before:h-10" href="https://github.com/t-katsumata" target="_blank">https://github.com/t-katsumata</a>
+            <a class="w-fit underline underline-offset-6 hover:text-sub transition-[color_0.3s] flex items-center gap-3 before:content-[''] before:bg-[url(../../images/skills/github.svg)] before:bg-cover before:inline-block before:w-9 before:h-[34px] md:before:w-[42px] md:before:h-10 focus:outline-none focus-visible:right-2" href="https://github.com/t-katsumata" target="_blank">https://github.com/t-katsumata</a>
           </li>
         </ul>
       </CommonSection>

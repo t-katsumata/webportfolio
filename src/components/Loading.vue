@@ -10,7 +10,7 @@ const isFirstVisit = ref<boolean>(true);
 
 const loadingOff = (): void => {
   isLoading.value = false;
-  document.body.style.overflow = "auto";
+  // document.body.style.overflow = "auto";
 };
 
 onMounted(async (): Promise<void> => {
@@ -23,7 +23,7 @@ onMounted(async (): Promise<void> => {
   } else {
     // 初回アクセス → ローディング画面を表示
     isFirstVisit.value = true;
-    document.body.style.overflow = "hidden";
+    document.body.style.overflowX = "hidden";
     setTimeout(() => {
       loadingOff();
       sessionStorage.setItem("visited", "true");
@@ -34,9 +34,9 @@ onMounted(async (): Promise<void> => {
 
 <template>
   <transition v-if="isFirstVisit" name="fade">
-    <div v-if="isLoading" class="loading-screen fixed inset-0 flex justify-center items-center bg-bg z-50">
-      <h1>
-        <Logo class="text-[72px]" />
+    <div v-if="isLoading" class="loading-screen fixed inset-0 flex justify-center items-center bg-bg z-50 @container">
+      <h1 class="@max-md:px-[6.4%]">
+        <Logo class="text-[56px] md:text-[72px] text-accent" />
       </h1>
     </div>
   </transition>

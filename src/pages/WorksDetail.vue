@@ -43,6 +43,10 @@ const sanitizedDetail = computed(() => {
   return articles.value[0]?.detail ? DOMPurify.sanitize(articles.value[0].detail) : '';
 });
 
+const getWorkCategoryClass = (category: string) => {
+  return category === '業務実績' ? 'bg-[#00002F]' : 'bg-[#BF0071]';
+}
+
 useHead({
   title: dynamicTitle,
   meta: [
@@ -74,7 +78,6 @@ const fetchWork = async (slug: string) => {
 };
 
 onMounted(async (): Promise<void> => {
-  console.log(matchedSubSkillIcons)
   const slugParam = route.params.slug;
   const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam;
   if (slug) fetchWork(slug);
@@ -91,7 +94,11 @@ watch(() => route.params.slug, (newSlug) => {
     <H1Heading title="Works" subtitle="成果物ギャラリー" />
     <CommonSection class="flex flex-col-reverse items-center md:flex-row-reverse gap-12 md:gap-[4.348%]">
       <div class="w-full md:w-3/5 fadeTarget fadeRight" v-intersect>
-        <h2 class="font-bold text-[20px]/[1.6]">{{ articles[0]?.title }}</h2>
+        <span
+          class="order-2 mt-4 text-white text-sm inline-block w-fit p-[3px_20px_4px] rounded-sm"
+          :class="getWorkCategoryClass(articles[0]?.workCategory[0] ?? '')"
+        >{{ articles[0]?.workCategory[0] ?? '' }}</span>
+        <h2 class="font-bold text-[20px]/[1.6] mt-2">{{ articles[0]?.title }}</h2>
         <p class="mt-4">{{ articles[0]?.summary }}</p>
         <table class="relative border w-full border-main mt-12 md:mt-10">
           <caption class="absolute top-[-16px] left-6 bg-bg px-[1em] font-bold">使用技術</caption>

@@ -14,12 +14,10 @@ export interface SkillItem {
   detail: string;
   iconUrl: string;
 }
-
 export interface SkillCategory {
   title: string;
   content: SkillItem[];
 }
-
 export interface BasicSkillContent {
   language: SkillCategory;
   framework: SkillCategory;
@@ -27,12 +25,10 @@ export interface BasicSkillContent {
   version: SkillCategory;
   other: SkillCategory;
 }
-
 export interface BasicSkill {
   title: string;
   content: BasicSkillContent[];
 }
-
 export interface SubSkill {
   id: number;
   name: string;
@@ -41,7 +37,6 @@ export interface SubSkill {
   detail: string;
   iconUrl: string;
 }
-
 export interface Tool {
   id: number;
   name: string;
@@ -49,13 +44,11 @@ export interface Tool {
   detail: string;
   iconUrl: string;
 }
-
 export interface Qualification {
   id: number;
   name: string;
   date: string;
 }
-
 export interface SkillData {
   basicSkill: BasicSkill;
   subSkill: {
@@ -80,6 +73,7 @@ export interface Thumbnail {
 }
 export interface Work {
   id: string;
+  workCategory: string[];
   slug: string;
   title: string;
   thumbnail: Thumbnail;

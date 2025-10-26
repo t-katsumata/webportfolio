@@ -18,6 +18,19 @@ useHead({
 const activeIndex = ref<number>(0);
 const container = ref<HTMLElement | null>(null);
 
+const onWheel = (e: WheelEvent) => {
+  const el = container.value;
+  if (!el) return;
+
+  const style = window.getComputedStyle(el);
+  const scrollX = style.overflowX;
+
+  if (scrollX === "scroll") {
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }
+};
+
 onMounted(async () => {
   await nextTick(); // DOM描画完了を待つ
 
@@ -44,21 +57,14 @@ onMounted(async () => {
     observer.observe(el);
   });
 
-  const onWheel = (e: WheelEvent) => {
-    const style = window.getComputedStyle(el);
-    const scrollX = style.overflowX;
-
-    if (scrollX === "scroll") {
-      e.preventDefault();
-      el.scrollLeft += e.deltaY;
-    }
-  };
-
   el.addEventListener("wheel", onWheel, { passive: false });
+});
 
-  onBeforeUnmount(() => {
+onBeforeUnmount(() => {
+  const el = container.value;
+  if (el) {
     el.removeEventListener("wheel", onWheel);
-  });
+  }
 });
 </script>
 
