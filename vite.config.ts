@@ -5,6 +5,7 @@ import webfontDownload from "vite-plugin-webfont-dl";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/',
   plugins: [
     vue(),
     tailwindcss(),
