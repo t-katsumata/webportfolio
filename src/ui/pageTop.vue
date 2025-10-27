@@ -8,11 +8,11 @@ const pageTop = () => {
 </script>
 
 <template>
-  <div @click="pageTop" class="pageTopBtn">
+  <button aria-label="ページの先頭へ移動" @click="pageTop" class="pageTopBtn">
     <p>
-      <span>PageTop</span>
+      <span aria-hidden="true">PageTop</span>
     </p>
-  </div>
+  </button>
 </template>
 
 <style scoped>

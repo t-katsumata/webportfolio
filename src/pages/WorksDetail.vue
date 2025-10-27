@@ -44,7 +44,7 @@ const sanitizedDetail = computed(() => {
 });
 
 const getWorkCategoryClass = (category: string) => {
-  return category === '業務実績' ? 'bg-[#00002F]' : 'bg-[#BF0071]';
+  return category === '業務実績' ? 'bg-[#00002F]' : 'bg-[#AD0065]';
 }
 
 useHead({
@@ -65,7 +65,7 @@ const fetchWork = async (slug: string) => {
     const title = data.contents[0]?.title;
     if (title) {
       dynamicTitle.value = `${title} | TOORU KATSUMATA Web Portfolio`;
-      descContent.value = `プロジェクト「${title}」の成果物の詳細を掲載しております。`
+      descContent.value = `成果物「${title}」の詳細を掲載しております。`
     }
 
     const publishedAt = data.contents[0]?.publishedAt;
@@ -103,8 +103,8 @@ watch(() => route.params.slug, (newSlug) => {
         <table class="relative border w-full border-main mt-12 md:mt-10">
           <caption class="absolute top-[-16px] left-6 bg-bg px-[1em] font-bold">使用技術</caption>
           <tbody>
-            <tr class="border-b border-gray-300">
-              <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">必須スキル</th>
+            <tr class="border-b border-main">
+              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">必須スキル</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-4">
                 <template v-if="matchedBasicSkillIcons.length > 0">
                   <div
@@ -115,6 +115,7 @@ watch(() => route.params.slug, (newSlug) => {
                     <img
                       :src="icon.iconUrl"
                       :alt="icon.name"
+                      :aria-label="icon.name"
                       v-tooltip="{
                         content: icon.name,
                         placement: 'top',
@@ -124,7 +125,7 @@ watch(() => route.params.slug, (newSlug) => {
                       }"
                       class="min-w-12 max-w-14 h-12"
                     />
-                    <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
+                    <span aria-hidden="true" class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
                   </div>
                 </template>
                 <template v-else>
@@ -132,8 +133,8 @@ watch(() => route.params.slug, (newSlug) => {
                 </template>
               </td>
             </tr>
-            <tr class="border-b border-gray-300">
-              <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">補助スキル</th>
+            <tr class="border-b border-main">
+              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">補助スキル</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
                 <template v-if="matchedSubSkillIcons.length > 0">
                   <div
@@ -144,6 +145,7 @@ watch(() => route.params.slug, (newSlug) => {
                     <img
                       :src="icon.iconUrl"
                       :alt="icon.name"
+                      :aria-label="icon.name"
                       v-tooltip="{
                         content: icon.name,
                         placement: 'top',
@@ -153,7 +155,7 @@ watch(() => route.params.slug, (newSlug) => {
                       }"
                       class="min-w-12 max-w-14 h-12"
                     />
-                    <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
+                    <span aria-hidden="true" class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
                   </div>
                 </template>
                 <template v-else>
@@ -162,7 +164,7 @@ watch(() => route.params.slug, (newSlug) => {
               </td>
             </tr>
             <tr>
-              <th class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">業務効率化ツール</th>
+              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">業務効率化ツール</th>
               <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
                 <template v-if="matchedToolIcons.length > 0">
                   <div
@@ -174,6 +176,7 @@ watch(() => route.params.slug, (newSlug) => {
                       v-if="matchedToolIcons.length !== 0"
                       :src="icon.iconUrl"
                       :alt="icon.name"
+                      :aria-label="icon.name"
                       v-tooltip="{
                         content: icon.name,
                         placement: 'top',
@@ -184,7 +187,7 @@ watch(() => route.params.slug, (newSlug) => {
                       class="min-w-12 max-w-14 h-12"
                     />
                     <span v-else>－</span>
-                    <span class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
+                    <span aria-hidden="true" class="text-xs mt-1 block md:hidden text-center">{{ icon.name }}</span>
                   </div>
                 </template>
                 <template v-else>
@@ -196,26 +199,33 @@ watch(() => route.params.slug, (newSlug) => {
         </table>
       </div>
       <figure class="w-full md:w-2/5 fadeTarget fadeLeft" v-intersect>
-        <img class="w-full aspect-[4/3] object-cover" :src="`${articles[0]?.thumbnail.url}`" width="712" height="534" alt="" loading="eager" />
+        <img
+          class="w-full aspect-[4/3] object-cover"
+          :src="`${articles[0]?.thumbnail.url}`"
+          width="712"
+          height="534"
+          :alt="`成果物「${articles[0]?.title}」のサムネイル画像`"
+          loading="eager"
+        />
       </figure>
     </CommonSection>
 
     <CommonSection>
       <dl class="max-w-4xl mx-auto fadeTarget fadeUp" v-intersect>
-        <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pb-4 border-b border-gray-300">
-          <dt class="font-bold">開発・運営担当期間</dt>
+        <div role="group" aria-labelledby="period" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pb-4 border-b border-gray-600">
+          <dt id="period" class="font-bold">開発・運営担当期間</dt>
           <dd class="max-md:ml-[1em]">{{ articles[0]?.period }}</dd>
         </div>
-        <div v-if="articles[0]?.devScale" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-300">
-          <dt class="font-bold">開発規模</dt>
+        <div role="group" aria-labelledby="devScale" v-if="articles[0]?.devScale" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-600">
+          <dt id="devScale" class="font-bold">開発規模</dt>
           <dd class="max-md:ml-[1em]">{{ articles[0]?.devScale }}</dd>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-300">
-          <dt class="font-bold">担当ポジション</dt>
+        <div role="group" aria-labelledby="position" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-600">
+          <dt id="position" class="font-bold">担当ポジション</dt>
           <dd class="max-md:ml-[1em]">{{ articles[0]?.position }}</dd>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pt-4">
-          <dt class="font-bold">概要</dt>
+        <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pt-4">
+          <dt id="detail" class="font-bold">概要</dt>
           <dd class="max-md:ml-[1em]">
             <div v-html="sanitizedDetail"></div>
           </dd>
@@ -225,14 +235,24 @@ watch(() => route.params.slug, (newSlug) => {
 
     <CommonSection>
       <div class="worksPagination fadeTarget fadeUp" v-intersect>
-        <RouterLink v-if="prevWork" :to="`/works/${prevWork.slug}`" class="worksPagination-item worksPagination-item__prev">
+        <RouterLink
+          v-if="prevWork"
+          :to="`/works/${prevWork.slug}`"
+          class="worksPagination-item worksPagination-item__prev"
+          :aria-label="`前の成果物：${prevWork.title}`"
+        >
           <div class="worksPagination-body">
             <span class="worksPagination-title">Prev</span>
             <span class="worksPagination-text">{{ prevWork.title }}</span>
           </div>
         </RouterLink>
         <div></div>
-        <RouterLink v-if="nextWork" :to="`/works/${nextWork.slug}`" class="worksPagination-item worksPagination-item__next">
+        <RouterLink
+          v-if="nextWork"
+          :to="`/works/${nextWork.slug}`"
+          class="worksPagination-item worksPagination-item__next"
+          :aria-label="`次の成果物：${nextWork.title}`"
+        >
           <div class="worksPagination-body">
             <span class="worksPagination-title">Next</span>
             <span class="worksPagination-text">{{ nextWork.title }}</span>

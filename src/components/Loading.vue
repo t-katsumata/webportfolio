@@ -34,9 +34,15 @@ onMounted(async (): Promise<void> => {
 
 <template>
   <transition v-if="isFirstVisit" name="fade">
-    <div v-if="isLoading" class="loading-screen fixed inset-0 flex justify-center items-center bg-bg z-50 @container">
+    <div
+      v-if="isLoading"
+      class="loading-screen fixed inset-0 flex justify-center items-center bg-bg z-50 @container"
+      role="status"
+      aria-live="assertive"
+      aria-label="読み込み中です"
+    >
       <h1 class="@max-md:px-[6.4%]">
-        <Logo class="text-[56px] md:text-[72px] text-accent" />
+        <Logo role="presentation" aria-hidden="true" class="text-[56px] md:text-[72px] text-accent" />
       </h1>
     </div>
   </transition>

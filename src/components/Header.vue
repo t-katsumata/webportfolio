@@ -41,6 +41,7 @@ const handleKeydown = (e: KeyboardEvent): void => {
     const focusable = menuRef.value.querySelectorAll<HTMLElement>(
       'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
     )
+    if (focusable.length === 0) return;
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
 
@@ -130,7 +131,6 @@ onUnmounted(() => {
         <ul
           ref="menuRef"
           id="main-menu"
-          :aria-hidden="!isOpen"
           class="flex md:gap-x-6 text-accent max-md:flex-col max-md:absolute max-md:top-[55px] max-md:w-[300px] max-md:bg-bg max-md:text-center max-md:gap-y-3 max-md:p-[24px_24px_40px] max-md:shadow-[0_4px_4px_rgb(0_0_0/0.3)] transition-all duration-400"
           :class="isOpen ? 'max-md:right-0' : 'max-md:right-[-100%]'"
         >
