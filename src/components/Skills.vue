@@ -35,8 +35,19 @@ onMounted(() => {
 </script>
 
 <template>
+  <section :aria-labelledby="`skill-level-detail`" class="mt-10">
+    <h2 id="skill-level-detail" class="fadeTarget fadeUp text-accent font-bold text-[20px]/[1.6] pl-3 border-l-4 border-accent" v-intersect>各スキルレベルの詳細</h2>
+    <ol aria-label="各スキルレベル" class="mt-6 fadeTarget fadeUp" v-intersect>
+      <li>Lv.1：触り程度、今後使いこなしたいスキル</li>
+      <li>Lv.2：独学で使用経験あり</li>
+      <li>Lv.3：実務で使用経験あり</li>
+      <li>Lv.4：実務で３年以上使用経験あり</li>
+      <li>Lv.5：実務でも独学でも長く使用経験あり</li>
+    </ol>
+  </section>
+
   <!-- 必須スキル -->
-  <section :aria-labelledby="`basicSkill-title`" v-if="props.basicSkill">
+  <section :aria-labelledby="`basicSkill-title`" v-if="props.basicSkill" class="mt-16">
     <h2 id="basicSkill-title" class="fadeTarget fadeUp text-accent font-bold text-[20px]/[1.6] pl-3 border-l-4 border-accent" v-intersect>{{ skillData.basicSkill.title }}</h2>
     <section v-for="(category, key) in skillData.basicSkill.content[0]" class="mt-6 @container" :key="key">
       <h3 class="fadeTarget fadeUp text-accent font-medium before:content-['◎'] text-[18px] before:mr-1" v-intersect>{{ category.title }}</h3>
