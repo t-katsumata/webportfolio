@@ -224,7 +224,7 @@ watch(() => route.params.slug, (newSlug) => {
           <dt id="position" class="font-bold">担当ポジション</dt>
           <dd class="max-md:ml-[1em]">{{ articles[0]?.position }}</dd>
         </div>
-        <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pt-4">
+        <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[200px_1fr] place-items-start gap-2 md:gap-5 pt-4">
           <dt id="detail" class="font-bold">概要</dt>
           <dd class="max-md:ml-[1em]">
             <div v-html="sanitizedDetail"></div>
