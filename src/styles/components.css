@@ -416,6 +416,31 @@
   }
 }
 
+/* 成果物ギャラリー詳細 */
+.workRichText {
+  h3 {
+    font-weight: bold;
+    &:not(:first-of-type) {
+      margin-top: 1em;
+    }
+    & + p {
+      margin-left: 1em;
+    }
+    & + ul {
+      margin-left: 2em;
+      li:not(:first-of-type) {
+        margin-top: 0;
+      }
+    }
+  }
+  ul {
+    list-style: disc;
+    margin-left: 1.25em;
+    li:not(:first-of-type) {
+      margin-top: 0.5em;
+    }
+  }
+}
 .worksPagination {
   display: flex;
   justify-content: space-between;

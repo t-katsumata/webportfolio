@@ -39,6 +39,12 @@ const matchedToolIcons = computed(() => {
   return getMatchedIcons(articles.value[0]?.tools || [], skillData.value.tool.content)
 });
 
+const sanitizedFeature = computed(() => {
+  return articles.value[0]?.feature ? DOMPurify.sanitize(articles.value[0].feature) : '';
+});
+const sanitizedAssignment = computed(() => {
+  return articles.value[0]?.assignment ? DOMPurify.sanitize(articles.value[0].assignment) : '';
+});
 const sanitizedDetail = computed(() => {
   return articles.value[0]?.detail ? DOMPurify.sanitize(articles.value[0].detail) : '';
 });
@@ -98,14 +104,14 @@ watch(() => route.params.slug, (newSlug) => {
           class="order-2 mt-4 text-white text-sm inline-block w-fit p-[3px_20px_4px] rounded-sm"
           :class="getWorkCategoryClass(articles[0]?.workCategory[0] ?? '')"
         >{{ articles[0]?.workCategory[0] ?? '' }}</span>
-        <h2 class="font-bold text-[20px]/[1.6] mt-2">{{ articles[0]?.title }}</h2>
-        <p class="mt-4">{{ articles[0]?.summary }}</p>
-        <table class="relative border w-full border-main mt-12 md:mt-10">
-          <caption class="absolute top-[-16px] left-6 bg-bg px-[1em] font-bold">使用技術</caption>
+        <h2 class="font-bold text-[20px]/[1.6] mt-2.5">{{ articles[0]?.title }}</h2>
+        <p class="mt-5">{{ articles[0]?.summary }}</p>
+        <table class="relative border w-full border-main mt-12">
+          <caption class="absolute top-[-16px] left-6 text-white bg-main p-[0_1em_2px] text-[15px]">使用技術</caption>
           <tbody>
             <tr class="border-b border-main">
-              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">必須スキル</th>
-              <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-4">
+              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1.25em] max-md:pr-[0.5em]">必須スキル</th>
+              <td class="p-[1.25em] max-md:pl-[0.5em] flex flex-wrap gap-4">
                 <template v-if="matchedBasicSkillIcons.length > 0">
                   <div
                     v-for="(icon, index) in matchedBasicSkillIcons"
@@ -134,8 +140,8 @@ watch(() => route.params.slug, (newSlug) => {
               </td>
             </tr>
             <tr class="border-b border-main">
-              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">補助スキル</th>
-              <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
+              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1.25em] max-md:pr-[0.5em]">補助スキル</th>
+              <td class="p-[1.25em] max-md:pl-[0.5em] flex flex-wrap gap-3">
                 <template v-if="matchedSubSkillIcons.length > 0">
                   <div
                     v-for="(icon, index) in matchedSubSkillIcons"
@@ -164,8 +170,8 @@ watch(() => route.params.slug, (newSlug) => {
               </td>
             </tr>
             <tr>
-              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1em] max-md:pr-[0.5em]">業務効率化ツール</th>
-              <td class="p-[1em] max-md:pl-[0.5em] flex flex-wrap gap-3">
+              <th scope="row" class="w-25 md:w-28 text-sm font-normal text-left p-[1.25em] max-md:pr-[0.5em]">業務効率化ツール</th>
+              <td class="p-[1.25em] max-md:pl-[0.5em] flex flex-wrap gap-3">
                 <template v-if="matchedToolIcons.length > 0">
                   <div
                     v-for="(icon, index) in matchedToolIcons"
@@ -211,23 +217,39 @@ watch(() => route.params.slug, (newSlug) => {
     </CommonSection>
 
     <CommonSection>
-      <dl class="max-w-4xl mx-auto fadeTarget fadeUp" v-intersect>
-        <div role="group" aria-labelledby="period" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 pb-4 border-b border-gray-600">
+      <dl class="fadeTarget fadeUp" v-intersect>
+        <div v-if="articles[0]?.siteUrl" role="group" aria-labelledby="siteUrl" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-t border-gray-600">
+          <dt id="siteUrl" class="font-bold">サイトURL</dt>
+          <dd class="max-md:ml-[1em]">
+            <a class="underline underline-offset-6 transition-[color_0.3s] hover:text-sub" :href="`${articles[0]?.siteUrl}`" target="_blank">{{ articles[0]?.siteUrl }}</a> 
+          </dd>
+        </div>
+        <div role="group" aria-labelledby="period" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-t border-b border-gray-600">
           <dt id="period" class="font-bold">開発・運営担当期間</dt>
           <dd class="max-md:ml-[1em]">{{ articles[0]?.period }}</dd>
         </div>
-        <div role="group" aria-labelledby="devScale" v-if="articles[0]?.devScale" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-600">
+        <div role="group" aria-labelledby="devScale" v-if="articles[0]?.devScale" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-b border-gray-600">
           <dt id="devScale" class="font-bold">開発規模</dt>
           <dd class="max-md:ml-[1em]">{{ articles[0]?.devScale }}</dd>
         </div>
-        <div role="group" aria-labelledby="position" class="grid grid-cols-1 md:grid-cols-[200px_1fr] items-center gap-2 md:gap-5 py-4 border-b border-gray-600">
+        <div role="group" aria-labelledby="position" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-b border-gray-600">
           <dt id="position" class="font-bold">担当ポジション</dt>
           <dd class="max-md:ml-[1em]">{{ articles[0]?.position }}</dd>
         </div>
-        <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[200px_1fr] place-items-start gap-2 md:gap-5 pt-4">
+        <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-b border-gray-600">
           <dt id="detail" class="font-bold">概要</dt>
+          <dd class="max-md:ml-[1em]" v-html="sanitizedDetail"></dd>
+        </div>
+        <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-b border-gray-600">
+          <dt id="detail" class="font-bold">取り組み内容・工夫した点</dt>
           <dd class="max-md:ml-[1em]">
-            <div v-html="sanitizedDetail"></div>
+            <div class="workRichText" v-html="sanitizedFeature"></div>
+          </dd>
+        </div>
+        <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-b border-gray-600">
+          <dt id="detail" class="font-bold">苦労した点・課題のある点</dt>
+          <dd class="max-md:ml-[1em]">
+            <div class="workRichText" v-html="sanitizedAssignment"></div>
           </dd>
         </div>
       </dl>

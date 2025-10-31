@@ -85,6 +85,9 @@ export interface Work {
   devScale: string;
   position: string;
   detail: string;
+  feature: string;
+  assignment: string;
+  siteUrl: string;
 }
 export interface WorkListResponse<T> {
   contents: T[];
