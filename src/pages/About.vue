@@ -109,6 +109,7 @@ onBeforeUnmount(() => {
 
     <CommonSection aria-labelledby="biography">
       <H2Heading id="biography" title="Biography" subtitle="略歴" />
+      <p class="mt-10 fadeTarget fadeUp" v-intersect>※画像は全てイメージです。</p>
       <div
         aria-label="略歴タイムライン"
         class="timeline fadeTarget fadeUp"
@@ -130,7 +131,7 @@ onBeforeUnmount(() => {
             <dt class="timeline-date">{{ item.year }}</dt>
             <dd class="timeline-content">
               <figure class="timeline-image">
-                <img :src="`${item.imageUrl}`" :alt="`${item.title}の写真`" width="320" height="240" />
+                <img class="aspect-[320/240] object-cover" :src="`${item.imageUrl}`" :alt="`${item.title}の写真`" width="320" height="240" />
               </figure>
               <div class="timeline-detail">
                 <p class="timeline-title">{{ item.title }}</p>

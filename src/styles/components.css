@@ -345,7 +345,7 @@
 }
 @media (width > 896px) {
   .timeline {
-    height: 400px;
+    height: 450px;
   }
   .timeline-content {
     flex-direction: row;
