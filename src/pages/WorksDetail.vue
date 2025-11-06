@@ -238,7 +238,7 @@ watch(() => route.params.slug, (newSlug) => {
         </div>
         <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-b border-gray-600">
           <dt id="detail" class="font-bold">概要</dt>
-          <dd class="max-md:ml-[1em]" v-html="sanitizedDetail"></dd>
+          <dd class="max-md:ml-[1em] workDetailText" v-html="sanitizedDetail"></dd>
         </div>
         <div role="group" aria-labelledby="detail" class="grid grid-cols-1 md:grid-cols-[25.362%_1fr] place-items-start gap-2 md:gap-6 py-5 border-b border-gray-600">
           <dt id="detail" class="font-bold">取り組み内容・工夫した点</dt>

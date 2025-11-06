@@ -417,6 +417,11 @@
 }
 
 /* 成果物ギャラリー詳細 */
+.workDetailText {
+  p:not(:first-of-type) {
+    margin-top: 1em;
+  }
+}
 .workRichText {
   h3 {
     font-weight: bold;
@@ -433,6 +438,7 @@
       }
     }
   }
+  
   ul {
     list-style: disc;
     margin-left: 1.25em;
