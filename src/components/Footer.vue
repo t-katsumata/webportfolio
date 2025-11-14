@@ -12,10 +12,10 @@ import Logo from './Logo.vue';
         <Logo class="text-[32px] md:text-4xl text-left" />
       </RouterLink>
       <ul role="navigation" aria-label="フッターメニュー" class="flex gap-7 text-white">
-        <li><RouterLink to="/about">About</RouterLink></li>
-        <li><RouterLink to="/skills">Skills</RouterLink></li>
-        <li><RouterLink to="/works">Works</RouterLink></li>
-        <li><RouterLink to="/#contact">Contact</RouterLink></li>
+        <li><RouterLink class="transition-[opacity_0.3s] hover:opacity-70 max-md:underline max-md:underline-offset-[3px]" to="/about">About</RouterLink></li>
+        <li><RouterLink class="transition-[opacity_0.3s] hover:opacity-70 max-md:underline max-md:underline-offset-[3px]" to="/skills">Skills</RouterLink></li>
+        <li><RouterLink class="transition-[opacity_0.3s] hover:opacity-70 max-md:underline max-md:underline-offset-[3px]" to="/works">Works</RouterLink></li>
+        <li><RouterLink class="transition-[opacity_0.3s] hover:opacity-70 max-md:underline max-md:underline-offset-[3px]" to="/#contact">Contact</RouterLink></li>
       </ul>
     </div>
     <small class="block mt-8">&copy; 2025 TOORU KATSUMATA. All Rights Reserved.</small>

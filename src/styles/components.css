@@ -446,6 +446,18 @@
       margin-top: 0.5em;
     }
   }
+  a {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+    transition: color 0.3s;
+  }
+}
+@media (any-hover: hover) {
+  .workRichText {
+    a:hover {
+      color: var(--color-sub);
+    }
+  }
 }
 .worksPagination {
   display: flex;

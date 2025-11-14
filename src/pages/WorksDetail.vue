@@ -81,6 +81,8 @@ const fetchWork = async (slug: string) => {
       nextWork.value = adjacent.next;
     }
   }
+
+  document.querySelectorAll(".workRichText a").forEach((el) => el.setAttribute("target", "_blank"));
 };
 
 onMounted(async (): Promise<void> => {

@@ -117,7 +117,7 @@ onUnmounted(() => {
         >
           <span
             class="max-md:block max-md:w-full max-md:bg-accent max-md:my-[5px] transition-[0.4s] max-md:h-[3px]"
-            :class="isOpen ? 'max-md:rotate-45 max-md:translate-x-[0] max-md:translate-y-[7px]' : ''"
+            :class="isOpen ? 'max-md:rotate-45 max-md:translate-x-[0] max-md:translate-y-[8px]' : ''"
           ></span>
           <span
             class="max-md:block max-md:w-full max-md:bg-accent max-md:my-[5px] transition-[0.4s] max-md:h-[3px]"
@@ -135,7 +135,7 @@ onUnmounted(() => {
           :class="isOpen ? 'max-md:right-0' : 'max-md:right-[-100%]'"
         >
           <li class="max-md:border-b max-md:border-gray-300 max-md:pb-3">
-            <RouterLink to="/about" custom v-slot="{ navigate, href, isActive }">
+            <RouterLink class="relative md:before:transition-[width_0.3s_ease-in-out] md:before:content-[''] md:before:absolute md:before:bottom-[-2px] md:before:left-0 md:before:inline-block md:before:w-0 md:before:h-0.5 md:before:bg-accent md:hover:before:w-full" to="/about" custom v-slot="{ navigate, href, isActive }">
               <a
                 :href="href"
                 @click="navigate; closeMenu()"
@@ -147,13 +147,13 @@ onUnmounted(() => {
             </RouterLink>
           </li>
           <li class="max-md:border-b max-md:border-gray-300 max-md:pb-3">
-            <RouterLink to="/skills" @click="closeMenu">Skills</RouterLink>
+            <RouterLink class="relative md:before:transition-[width_0.3s_ease-in-out] md:before:content-[''] md:before:absolute md:before:bottom-[-2px] md:before:left-0 md:before:inline-block md:before:w-0 md:before:h-0.5 md:before:bg-accent md:hover:before:w-full" to="/skills" @click="closeMenu">Skills</RouterLink>
           </li>
           <li class="max-md:border-b max-md:border-gray-300 max-md:pb-3">
-            <RouterLink to="/works" @click="closeMenu">Works</RouterLink>
+            <RouterLink class="relative md:before:transition-[width_0.3s_ease-in-out] md:before:content-[''] md:before:absolute md:before:bottom-[-2px] md:before:left-0 md:before:inline-block md:before:w-0 md:before:h-0.5 md:before:bg-accent md:hover:before:w-full" to="/works" @click="closeMenu">Works</RouterLink>
           </li>
           <li>
-            <RouterLink to="/#contact" @click="closeMenu">Contact</RouterLink>
+            <RouterLink class="relative md:before:transition-[width_0.3s_ease-in-out] md:before:content-[''] md:before:absolute md:before:bottom-[-2px] md:before:left-0 md:before:inline-block md:before:w-0 md:before:h-0.5 md:before:bg-accent md:hover:before:w-full" to="/#contact" @click="closeMenu">Contact</RouterLink>
           </li>
         </ul>
       </nav>
